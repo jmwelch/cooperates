@@ -1,0 +1,18 @@
+<h1>Listing Users</h1>
+<table>
+  <tr>
+    <th>IDs:</th>
+    <th>Emails:</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @users.each do |users| %>
+  <tr>
+    <td><%= users.id %></td>
+    <td><%= users.email %></td>
+    <td><%= link_to "Add Friend", friendships_path(:friend_id => users), :method => :post %></td>
+  </tr>
+<% end %>
+</table>
