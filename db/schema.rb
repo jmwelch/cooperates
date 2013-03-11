@@ -11,20 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307224850) do
+ActiveRecord::Schema.define(:version => 20130302224850) do
 
-  create_table "restaurants", :force => true do |t|
-     t.string   "name"
-     t.string   "type"
-     t.string   "location"
-     t.float    "price_range"
-   end
 
-   create_table "suppliers", :force => true do |t|
-     t.string   "id"
-     t.string   "sname"
-     t.string   "rating"
-     t.string   "location"
-   end
 
 end
