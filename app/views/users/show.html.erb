@@ -1,0 +1,12 @@
+<h1><%= @user.email %> profile</h1>
+
+you're email is: <%= simple_format @user.email %>
+ 
+  <% @user.food.each do |user| %>
+ 
+  
+<% end %>
+
+<p>
+  <%= link_to "Edit", edit_user_path(@user) %>
+</p>
