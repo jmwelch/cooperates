@@ -1,2 +1,0 @@
-module NewUsersHelper
-end

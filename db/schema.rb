@@ -11,8 +11,40 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302224850) do
+ActiveRecord::Schema.define(:version => 20130315015835) do
 
+  create_table "foods", :id => false, :force => true do |t|
+    t.integer "food_id", :null => false
+    t.integer "user_id"
+    t.string  "fname"
+    t.integer "price"
+    t.integer "fID"
+  end
 
+  create_table "users", :id => false, :force => true do |t|
+    t.integer  "user_id",                                :null => false
+    t.string   "username"
+    t.string   "user_type"
+    t.string   "description"
+    t.integer  "price_range"
+    t.integer  "rating"
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.integer  "uID"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end

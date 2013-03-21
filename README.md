@@ -1,4 +1,0 @@
-cooperates
-==========
-
-cooperates
