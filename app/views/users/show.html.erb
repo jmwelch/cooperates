@@ -1,12 +1,11 @@
-<h1><%= @user.email %> profile</h1>
+<%= best_in_place @user, :email %>'s page 
 
-you're email is: <%= simple_format @user.email %>
+<% @user.food.each do |item| %>
  
-  <% @user.food.each do |user| %>
- 
-  
+  <%= item.fname %>
 <% end %>
 
-<p>
-  <%= link_to "Edit", edit_user_path(@user) %>
-</p>
+<% if current_user.id == @user.id %>
+
+<%="you can only see this part if you are looking at your own page" %>
+<%end%>

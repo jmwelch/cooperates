@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
-  has_many :food
+	set_primary_key :id
+
+  has_many :food#, :foreign_key => 'user_id'
+
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

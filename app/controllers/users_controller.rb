@@ -1,12 +1,17 @@
 class UsersController < ApplicationController
-before_filter :authenticate_user!, except: [:index, :show]
+  respond_to :html, :json
+before_filter :authenticate_user!, except: [:index]
   def index
-    @users = User.all
+    @search =User.search(params[:q])
+    @users = @search.result
+
+  @search.build_condition if @search.conditions.empty?
+  @search.build_sort if @search.sorts.empty?
   end
 
   def show
     @user = User.find(params[:id])
-    @food = Food.all
+    
   end
 
   def new
@@ -28,11 +33,8 @@ before_filter :authenticate_user!, except: [:index, :show]
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      redirect_to @user, notice: "user was successfully updated."
-    else
-      render "edit"
-    end
+    @user.update_attributes(params[:user])
+      respond_with @user
   end
 
   def destroy

@@ -11,15 +11,46 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314224004) do
+ActiveRecord::Schema.define(:version => 20130322033458) do
 
-  create_table "foods", :primary_key => "fID", :force => true do |t|
-    t.integer "uID"
+  create_table "foods", :id => false, :force => true do |t|
+    t.integer "id",      :null => false
+    t.integer "user_id"
     t.string  "fname"
     t.integer "price"
   end
 
-  create_table "users", :primary_key => "uID", :force => true do |t|
+  create_table "ingedients", :force => true do |t|
+    t.string "ingedient_name"
+    t.date   "date"
+    t.float  "current_price"
+  end
+
+  create_table "inventories", :force => true do |t|
+    t.integer "user_id"
+    t.integer "ingredient_id"
+    t.date    "purchase_date"
+    t.integer "purchase_price"
+    t.float   "quantity_bought"
+    t.float   "quanity_left"
+  end
+
+  create_table "recipes", :force => true do |t|
+    t.integer "food_id"
+    t.integer "inventory_id"
+    t.float   "amt_used"
+  end
+
+  create_table "sells", :force => true do |t|
+    t.integer "user_id"
+    t.integer "ingredient_id"
+    t.date    "date"
+    t.float   "current_cost"
+    t.integer "quantity_left"
+  end
+
+  create_table "users", :id => false, :force => true do |t|
+    t.integer  "id",                                     :null => false
     t.string   "username"
     t.string   "user_type"
     t.string   "description"

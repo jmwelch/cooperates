@@ -12,4 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= r/e/q/u/i/r/e/_/t/r/e/e/.
+//= require best_in_place
+//= require best_in_place.purr
+//= require_tree .
