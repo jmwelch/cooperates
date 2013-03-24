@@ -1,0 +1,11 @@
+<%= best_in_place @user, :email %>'s page 
+
+<% @user.food.each do |item| %>
+ 
+  <%= item.fname %>
+<% end %>
+
+<% if current_user.id == @user.id %>
+
+<%="you can only see this part if you are looking at your own page" %>
+<%end%>
