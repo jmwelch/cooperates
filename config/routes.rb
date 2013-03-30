@@ -1,10 +1,18 @@
 Cooperates::Application.routes.draw do
+  resources :activities
+
+
+  resources :friendships
+
+
   devise_for :users
 
   resources :users do 
-  collection { post :search, to: 'users#index' }
+  collection { get :search, to: 'users#search' }
 end
 
+    resources :users
+    resources :foods
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

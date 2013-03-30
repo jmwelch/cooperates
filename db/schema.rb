@@ -11,13 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322033458) do
+ActiveRecord::Schema.define(:version => 20130330163323) do
+
+  create_table "activities", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "action"
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "activities", ["trackable_id"], :name => "index_activities_on_trackable_id"
+  add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
 
   create_table "foods", :id => false, :force => true do |t|
     t.integer "id",      :null => false
     t.integer "user_id"
     t.string  "fname"
     t.integer "price"
+  end
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "ingedients", :force => true do |t|
@@ -49,8 +68,7 @@ ActiveRecord::Schema.define(:version => 20130322033458) do
     t.integer "quantity_left"
   end
 
-  create_table "users", :id => false, :force => true do |t|
-    t.integer  "id",                                     :null => false
+  create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "user_type"
     t.string   "description"
@@ -69,9 +87,5 @@ ActiveRecord::Schema.define(:version => 20130322033458) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end
-
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end

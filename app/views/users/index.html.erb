@@ -1,22 +1,9 @@
 user index
 
-<%= search_form_for @search, url: search_users_path, method: :post do |f| %>
-  <%= f.condition_fields do |c| %>
-    <%= render "condition_fields", f: c %>
-  <% end %>
-  <p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
-  <div class="field">
-    Sort:
-    <%= f.sort_fields do |s| %>
-      <%= s.sort_select %>
-    <% end %>
-  </div>
-  <div class="actions"><%= f.submit "Search" %></div>
-<% end %>
-
-<div>
-<% @users.each do |user| %>
- 
-  <%= simple_format user.email %>
-<% end %>
-</div>
+<h1>remember to rewire food table, ingredient table, etc</h1>
+<h1>agenda</h1>
+<h2>new features:</h2>
+<h3>slickGrid, fnordMetric, guest_user</h3>
+<h2>improve features:</h2>
+<h3>activities[implement SimpleDelegator]</h3>
+<h3>search[autocomplete, datatables, tagging, sunspot, elastic search]</h3>

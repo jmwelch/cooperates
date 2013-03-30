@@ -1,13 +1,19 @@
 class UsersController < ApplicationController
   respond_to :html, :json
-before_filter :authenticate_user!, except: [:index]
+  
+  before_filter :authenticate_user!#, except: [:index]
+
   def index
+    @users = User.all
+  end
+
+  def search
     @search =User.search(params[:q])
     @users = @search.result
 
-  @search.build_condition if @search.conditions.empty?
-  @search.build_sort if @search.sorts.empty?
-  end
+ # @search.build_condition if @search.conditions.empty?
+ # @search.build_sort if @search.sorts.empty?
+  end    
 
   def show
     @user = User.find(params[:id])
@@ -15,6 +21,7 @@ before_filter :authenticate_user!, except: [:index]
   end
 
   def new
+  
     @user = User.new
   end
 
