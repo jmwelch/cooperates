@@ -13,6 +13,10 @@ end
 
     resources :users
     resources :foods
+    resources :inventories
+    resources :ingredients
+    resources :recipes
+    resources :sells
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

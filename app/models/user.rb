@@ -6,10 +6,21 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
-  has_many :food#, :foreign_key => 'user_id'
+  #has_many :food#, :foreign_key => 'user_id'
 
   has_many :activities
   
+###########################
+  has_many :inventory 
+  has_many :ingredient, :through => :inventory 
+  has_many :recipe, :through => :inventory
+###########################
+  has_many :food
+  has_many :recipe, :through => :food
+###########################
+
+
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
