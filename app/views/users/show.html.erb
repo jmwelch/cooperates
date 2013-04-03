@@ -59,8 +59,7 @@ example of in-place editing(click on name to see)==>
 <!--//////////////////////////ABOVE=FINISHED:::BELOW=IN-PROGRESS//////////////////////////////-->
   <h2>users>>food, inventory, ingredients>>recipe:</h2>
   <ul>
-    <li>food name | amount used | quantity left | ingredient name </li>
-    <li>
+    food name | amount used | quantity left | ingredient name
     <% @user.food.each do |food| %>
       <% if current_user.id == food.user_id %>
         <% @food = food%>
