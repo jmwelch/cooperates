@@ -3,6 +3,9 @@
   <head>
     <title>cooperates</title>
     <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= stylesheet_link_tag 'bootstrap', 'bootstrap-responsive', 'bootstrap.min', 'bootstrap-responsive', 'bootsrap-responsive.min' %>
+    <%= favicon_link_tag "favicon.png" %>
+    
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tag %>
   </head>
@@ -24,6 +27,7 @@
   <% end %>
 
   <%= yield %>
+  
 </div>
   </body>
 </html>
