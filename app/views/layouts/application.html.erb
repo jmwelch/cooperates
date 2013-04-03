@@ -10,17 +10,46 @@
     <%= csrf_meta_tag %>
   </head>
   <body>
-    <div id="container">
-  <div id="user_nav">
-    <% if user_signed_in? %>
-      Logged in as <strong><%= link_to current_user.username, current_user %></strong>.
-      <%= link_to 'Edit account information', edit_user_registration_path %> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Sign up", new_user_registration_path %> |
-      <%= link_to "Login", new_user_session_path %>
-    <% end %>
-  </div>
+
+     <div id="nav_bar" class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="brand" href="#">
+              Cooperat.es
+            </a>
+            <ul class="nav">
+              <li>
+                <%= link_to "Home", root_path%>
+                </a>
+              </li>
+              <% if user_signed_in? %>
+                <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
+                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+              <% else %>
+                <li><%= link_to "Sign up", new_user_registration_path %></li>
+                <li><%= link_to "Login", new_user_session_path %></li>
+              <% end %>
+              <% if user_signed_in? %>
+                <br>Logged in as <%= link_to current_user.username, current_user %>
+             <% end %>
+              
+            </ul>
+
+
+            <form class="navbar-form pull-right">
+              <input name="textinput1" type="email" placeholder="Email" class="span2">
+              <input name="textinput2" type="password" placeholder="Password" class="span2">
+              <button class="btn">
+                Sign in
+              </button>
+            </form>
+            <li class="undefined">
+              <a href="#">
+              </a>
+            </li>
+          </div>
+        </div>
+      </div>
 
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, id: "flash_#{name}" %>
