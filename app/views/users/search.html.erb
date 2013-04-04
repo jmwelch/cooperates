@@ -8,7 +8,7 @@
     <%= f.label :email_cont, "Name contains" %>
     <%= f.text_field :email_cont %>
   </div>
-  <div class="actions"><%= f.submit "Search" %></div>
+  <div class="actions"><%= f.submit "Search", :class=>"btn" %></div>
 <% end %>
 
 <!--<%= search_form_for @search, url: search_users_path, method: :post do |f| %>
