@@ -2,5 +2,5 @@
 
 
 To-Do (for Neil):
--Implement cleaner result interface for search (IE a table)
--Add search option to internal interface
+-Implement cleaner result interface for search (IE a table) - COMPLETE
+-Add search option to internal interface - COMPLETE

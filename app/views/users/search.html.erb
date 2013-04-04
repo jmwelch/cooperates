@@ -26,10 +26,25 @@
 <% end %>
 -->
 <div>
-<% if @search.inspect != 'Ransack::Search<class: User, base: Grouping <conditions: [Condition <attributes: [nil], predicate: eq, values: [nil]>], combinator: and>>' %>  
+<% if @search.inspect != 'Ransack::Search<class: User, base: Grouping <conditions: [Condition <attributes: [nil], predicate: eq, values: [nil]>], combinator: and>>' %> 
+
 <% @users.each do |user| %>
-  <%= link_to user.username, user %>
-  <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %></br>
+<table class="table table-bordered">
+  <tr>
+    <th>User </th>
+    <th> Description </th>
+    <th> Price Range </th>
+    <th> Rating </th>
+  </tr>
+<tr>
+  <td><%= link_to user.username, user %>
+  <br><%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %></br></td>
+  <td><%= user.description %></td>
+  <td><%= user.price_range %></td>
+  <td><%= user.rating %></td>
+</tr>
 <% end %>
+</table>  
 <% end %>
+
 </div>

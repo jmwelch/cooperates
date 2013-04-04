@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>cooperates</title>
+    <title>Cooperat.es</title>
     <%= stylesheet_link_tag    "application", media: "all" %>
     <%= stylesheet_link_tag 'bootstrap', 'bootstrap-responsive', 'bootstrap.min', 'bootstrap-responsive', 'bootstrap-responsive.min' %>
     <%= favicon_link_tag "favicon.png" %>
-    
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tag %>
   </head>
@@ -14,9 +13,7 @@
      <div id="nav_bar" class="navbar navbar-fixed-top navbar-inverse">
         <div class="navbar-inner">
           <div class="container">
-            <a class="brand" href="#">
-              Cooperat.es
-            </a>
+            <%= link_to "Cooperat.es", root_path, {:class => 'brand', :style=> 'color:#3399FF'} %>
             <ul class="nav">
               <li>
                 <%= link_to "Home", root_path%>
@@ -25,6 +22,7 @@
               <% if user_signed_in? %>
                 <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
                 <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+                <li><%= link_to "Search", search_users_path %>
               <% else %>
                 <li><%= link_to "Sign up", new_user_registration_path %></li>
                 <li><%= link_to "Login", new_user_session_path %></li>
