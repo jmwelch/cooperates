@@ -13,14 +13,14 @@
 
 <div>
 <% if @search.inspect != 'Ransack::Search<class: User, base: Grouping <conditions: [Condition <attributes: [nil], predicate: eq, values: [nil]>], combinator: and>>' %>  
-	<% @users.each do |user| %>
-    <table class="table table-bordered">
-      <tr>
-        <th>User </th>
-        <th> Description </th>
-        <th> Price Range </th>
-        <th> Rating </th>
-      </tr>
+	<table class="table table-bordered">
+    <tr>
+      <th>User </th>
+      <th> Description </th>
+      <th> Price Range </th>
+      <th> Rating </th>
+    </tr>
+		<% @users.each do |user| %>
     <tr>
       <td><%= link_to user.username, user %>
       <br><%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %></br></td>
