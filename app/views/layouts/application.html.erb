@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>cooperates</title>
+    <title>Cooperat.es</title>
     <%= stylesheet_link_tag    "application", media: "all" %>
     <%= stylesheet_link_tag 'bootstrap', 'bootstrap-responsive', 'bootstrap.min', 'bootstrap-responsive', 'bootstrap-responsive.min' %>
     <%= favicon_link_tag "favicon.png" %>
@@ -24,6 +24,7 @@
               </li>
               <% if user_signed_in? %>
                 <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
+                <li><%= link_to 'Search', users_search_path %></li>
                 <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
               <% else %>
                 <li><%= link_to "Sign up", new_user_registration_path %></li>

@@ -14,13 +14,24 @@
 <div>
 <% if @search.inspect != 'Ransack::Search<class: User, base: Grouping <conditions: [Condition <attributes: [nil], predicate: eq, values: [nil]>], combinator: and>>' %>  
 	<% @users.each do |user| %>
-		<% unless user.username == current_user.username %>
-			<%= link_to user.username, user %>
-			<%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %></br>
-		<% end %>
-	<% end %>
-	<% if @users.empty? %>
-		<%= "No results" %>
-	<% end %>
+    <table class="table table-bordered">
+      <tr>
+        <th>User </th>
+        <th> Description </th>
+        <th> Price Range </th>
+        <th> Rating </th>
+      </tr>
+    <tr>
+      <td><%= link_to user.username, user %>
+      <br><%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %></br></td>
+      <td><%= user.description %></td>
+      <td><%= user.price_range %></td>
+      <td><%= user.rating %></td>
+   </tr>
+  <% end %>
+  </table>
+  <% if @users.nil? || @users.empty? %>
+    <h2>No results</h2>
+  <% end %>
 <% end %>
 </div>
