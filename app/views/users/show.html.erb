@@ -13,9 +13,6 @@
 	<h3>Price Range:</h3>
 	<h4><%= @user.price_range %></h4>
 
-	<h3>Rating:</h3>
-	<h4><%= @user.rating %></h4>
-
 	<h3>List of Foods:</h3>
 	<% @user.food.each do |item| %> 
 		<h4><%= item.fname %></h4>
