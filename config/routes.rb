@@ -8,7 +8,7 @@ Cooperates::Application.routes.draw do
   devise_for :users
 
   resources :users do 
-  collection { get :search, to: 'users#search' }
+  collection { get :search, to: 'users#search', :as => 'users_search' }
 end
 
     resources :users
@@ -23,6 +23,7 @@ end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
+		match 'users/search' => 'users#search'
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
