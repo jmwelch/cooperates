@@ -1,5 +1,29 @@
-example of in-place editing(click on name to see)==>
-<%= best_in_place @user, :username %>'s page 
+<p>This is a placeholder</p>
+<h1><%= best_in_place @user, :username %>'s page</h1>
+<ul>
+	<h3>Username:</h3>
+	<h4><%= @user.username %></h4>
+
+	<h3>User type:</h3>
+	<h4><%= @user.user_type %></h4>
+
+	<h3>Description:</h3>
+	<h4><%= @user.description %></h4>
+
+	<h3>Price Range:</h3>
+	<h4><%= @user.price_range %></h4>
+
+	<h3>Rating:</h3>
+	<h4><%= @user.rating %></h4>
+
+	<h3>List of Foods:</h3>
+	<% @user.food.each do |item| %> 
+		<h4><%= item.fname %></h4>
+	<% end %>
+</ul>
+<% if current_user.id == @user.id %>
+	<p><%= link_to 'Edit Profile', edit_user_path %></p>
+<% end %>
 
 <h2>Friends</h2>
 <ul>
@@ -11,7 +35,9 @@ example of in-place editing(click on name to see)==>
   <% end %>
 </ul>
 
-<p><%= link_to "Find Friends", users_path %></p>
+<% if current_user.id == @user.id %>
+	<p><%= link_to "Find Friends", users_path %></p>
+<% end %>
 
 <h2>Friended by Users</h2>
 <ul>
