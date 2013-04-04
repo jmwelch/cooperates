@@ -3,7 +3,7 @@
   <head>
     <title>cooperates</title>
     <%= stylesheet_link_tag    "application", media: "all" %>
-    <%= stylesheet_link_tag 'bootstrap', 'bootstrap-responsive', 'bootstrap.min', 'bootstrap-responsive', 'bootsrap-responsive.min' %>
+    <%= stylesheet_link_tag 'bootstrap', 'bootstrap-responsive', 'bootstrap.min', 'bootstrap-responsive', 'bootstrap-responsive.min' %>
     <%= favicon_link_tag "favicon.png" %>
     
     <%= javascript_include_tag "application" %>
@@ -29,13 +29,9 @@
                 <li><%= link_to "Sign up", new_user_registration_path %></li>
                 <li><%= link_to "Login", new_user_session_path %></li>
               <% end %>
-              <% if user_signed_in? %>
-                <br>Logged in as <%= link_to current_user.username, current_user %>
-             <% end %>
               
             </ul>
-
-
+            
             <form class="navbar-form pull-right">
               <input name="textinput1" type="email" placeholder="Email" class="span2">
               <input name="textinput2" type="password" placeholder="Password" class="span2">
@@ -43,10 +39,8 @@
                 Sign in
               </button>
             </form>
-            <li class="undefined">
-              <a href="#">
-              </a>
-            </li>
+          
+            
           </div>
         </div>
       </div>
@@ -54,9 +48,35 @@
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, id: "flash_#{name}" %>
   <% end %>
-
+  
+  <div class="container">
+    <br>
   <%= yield %>
+  </div>
   
 </div>
+  
+    <!-- FOOTER -->
+
+
+    <div class="container">
+    <hr>        
+    <div id ="textbox" style="clear: both;">
+     <% if user_signed_in? %>
+       <p class="alignleft">© Cooperat.es 2013</p>
+       <p class="alignright">Logged in as <%= link_to current_user.username, current_user %></p>
+    </div>
+    
+    <% end %>
+        
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+    </script>
+    <%= javascript_include_tag 'bootstrap.js' %>
+    </script>
+  
   </body>
+  
+  </div>
 </html>

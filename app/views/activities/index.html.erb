@@ -1,8 +1,16 @@
 <h1>Activities</h1>
 
 <% @activities.each do |activity| %>
-  <%= div_for activity do %>
-    <%= link_to activity.user.username, activity.user %>
-    <%= render "activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity %>
+  
+  <%= if @activity.present? %>
+    <%= div_for activity do %>
+      <%= link_to activity.user.username, activity.user %>
+      <%= render "activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity %>
+    <% end %>
   <% end %>
+  
+  <% else %>
+    <h2>No activities </h2>
+  <% end %>
+  
 <% end %>
