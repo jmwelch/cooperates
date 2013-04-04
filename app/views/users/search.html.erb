@@ -3,7 +3,7 @@
 <br>
 <br>
 
-<%= search_form_for @search, url: search_users_path do |f| %>
+<%= search_form_for @search, url: users_search_path do |f| %>
   <div class="field">
     <%= f.label :email_cont, "Name contains" %>
     <%= f.text_field :email_cont %>
@@ -11,20 +11,6 @@
   <div class="actions"><%= f.submit "Search", :class=>"btn" %></div>
 <% end %>
 
-<!--<%= search_form_for @search, url: search_users_path, method: :post do |f| %>
-  <%= f.condition_fields do |c| %>
-    <%= render "condition_fields", f: c %>
-  <% end %>
-  <p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
-  <div class="field">
-    Sort:
-    <%= f.sort_fields do |s| %>
-      <%= s.sort_select %>
-    <% end %>
-  </div>
-  <div class="actions"><%= f.submit "Search" %></div>
-<% end %>
--->
 <div>
 <% if @search.inspect != 'Ransack::Search<class: User, base: Grouping <conditions: [Condition <attributes: [nil], predicate: eq, values: [nil]>], combinator: and>>' %>  
 	<% @users.each do |user| %>
