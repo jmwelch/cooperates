@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20130322033458) do
     t.float  "current_price"
   end
 
-  create_table "inventories", :force => true do |t|
+  create_table "inventory", :force => true do |t|
     t.integer "user_id"
     t.integer "ingredient_id"
     t.date    "purchase_date"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20130322033458) do
     t.float   "quanity_left"
   end
 
-  create_table "recipes", :force => true do |t|
+  create_table "recipe", :force => true do |t|
     t.integer "food_id"
     t.integer "inventory_id"
     t.float   "amt_used"
