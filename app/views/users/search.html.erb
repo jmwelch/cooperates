@@ -27,9 +27,12 @@
 -->
 <div>
 <% if @search.inspect != 'Ransack::Search<class: User, base: Grouping <conditions: [Condition <attributes: [nil], predicate: eq, values: [nil]>], combinator: and>>' %>  
-<% @users.each do |user| %>
-  <%= link_to user.username, user %>
-  <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %></br>
-<% end %>
+	<% @users.each do |user| %>
+		<%= link_to user.username, user %>
+		<%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %></br>
+	<% end %>
+	<% if @users.empty? %>
+		<%= "No results" %>
+	<% end %>
 <% end %>
 </div>
