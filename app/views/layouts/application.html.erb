@@ -2,12 +2,12 @@
 <html>
   <head>
     <title>Cooperat.es</title>
-    <%= stylesheet_link_tag    "application", media: "all" %>
-    <%= stylesheet_link_tag 'bootstrap', 'bootstrap-responsive', 'bootstrap.min', 'bootstrap-responsive', 'bootstrap-responsive.min' %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= stylesheet_link_tag 'bootstrap', 'bootstrap-responsive', 'bootstrap.min', 'bootstrap-responsive', 'bootstrap-responsive.min',  'http://vjs.zencdn.net/c/video-js.css' %>
     <%= favicon_link_tag "favicon.png" %>
-    
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "application", 'http://vjs.zencdn.net/c/video.js' %>
     <%= csrf_meta_tag %>
+    <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
   </head>
   <body>
 
