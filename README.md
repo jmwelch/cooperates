@@ -3,5 +3,5 @@
 
 To-Do (for Neil):<br>
 -Implement navbar search fix<br>
--Add search option to internal interface<br>
+-Neatify IFP<br>
 -Revamp welcome page<br>
