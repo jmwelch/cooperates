@@ -33,13 +33,17 @@
               
             </ul>
             
-            <form class="navbar-form pull-right">
-              <input name="textinput1" type="email" placeholder="Email" class="span2">
-              <input name="textinput2" type="password" placeholder="Password" class="span2">
-              <button class="btn">
-                Sign in
-              </button>
-            </form>
+ 
+            <%= form_for(resource, :as => resource_name, :url => user_session_path, :html => { :class =>
+            'navbar-form pull-right'} ) do |f| %>
+              <%= f.email_field :email, :autofocus => true, :placeholder=>'Email', :class => 'span2' %>
+              <%= f.password_field :password, :autofocus=>true, :placeholder=>'Password', :class => 'span2' %>
+              <%= f.submit "Sign in", :class => 'btn' %>
+            <% end %>
+
+
+            
+
           
             
           </div>
