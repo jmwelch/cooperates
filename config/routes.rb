@@ -1,7 +1,7 @@
 Cooperates::Application.routes.draw do
   resources :activities
   resources :friendships
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
 
   resources :users do 
   collection { get :search, to: 'users#search', :as => 'users_search' }
@@ -13,6 +13,7 @@ end
     resources :ingredients
     resources :recipes
     resources :sells
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
