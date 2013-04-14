@@ -1,25 +1,29 @@
-<br>
+<div class="container">
+<br><br>
 <h1><%= best_in_place @user, :username %>'s page</h1>
 <ul>
 	<h3>Username:</h3>
-	<h4><%= @user.username %></h4>
+	<%= @user.username %>
 
 	<h3>User type:</h3>
-	<h4><%= @user.user_type %></h4>
+	<%= @user.user_type %>
 
 	<h3>Description:</h3>
-	<h4><%= raw @user.description %></h4>
+	<%= raw @user.description %>
 
 	<h3>Price Range:</h3>
-	<h4><%= @user.price_range %></h4>
+	<%= @user.price_range %>
 
 	<h3>List of Foods:</h3>
 	<% @user.food.each do |item| %> 
 		<h4><%= item.fname %></h4>
 	<% end %>
+	<% if @user.food.nil? || @user.food.empty? %>
+	  No foods added yet.
+	<% end %>
 </ul>
 <% if current_user.id == @user.id %>
-	<p><%= link_to 'Edit Profile', edit_user_path %></p>
+	<p><%= link_to 'Edit Profile', edit_user_path, {:style=>'color: #38ACEC'} %></p>
 <% end %>
 
 <h2>Friends</h2>
@@ -33,15 +37,20 @@
 </ul>
 
 <% if current_user.id == @user.id %>
-	<p><%= link_to "Find Friends", users_search_path %></p>
+	<p><%= link_to "Find Friends", users_search_path, {:style=>'color: #38ACEC'} %></p>
 <% end %>
 
 <h2>Friended by Users</h2>
 <ul>
   <% for user in @user.inverse_friends %>
-    <li><%=h user.username %></li>
+    <li><%= user.username %></li>
   <% end %>
 </ul>
+  <% if @users.nil? || @users.empty? %>
+    You have no friends at this time.
+  <%end%>
+
+
 </br>
 </br>
 </br>
@@ -121,3 +130,4 @@
 
 <!-- end of IFP-->
 <% end %>
+</div>

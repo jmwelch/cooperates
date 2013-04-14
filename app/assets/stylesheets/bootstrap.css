@@ -8,6 +8,21 @@
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
 
+.logo {
+	width: 450px;
+	height: 100px !important;
+	padding-top: 15%;
+	padding-left: 28%;
+	padding-right: 30%;
+	position: relative;
+	max-width: 100%;
+
+}
+
+.carousel_image{
+	min-width: 100%;
+}
+
 .text_area{
 	height: 40px;
 }
