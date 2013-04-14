@@ -11,10 +11,10 @@
 .logo {
 	width: 450px;
 	height: 100px !important;
-	padding-top: 15%;
-	padding-left: 28%;
-	padding-right: 30%;
-	position: relative;
+	margin-left: 29%;
+	margin-top: 15%;
+	margin-right: auto;
+	display: block;
 	max-width: 100%;
 
 }

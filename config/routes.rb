@@ -61,9 +61,9 @@ end
   #     resources :products
   #   end  
   
-  authenticated :user do
-    root :to => "users#index"
-  end
+  #authenticated :user do
+  #  root :to => "users#index"
+  #end
   
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html. 
