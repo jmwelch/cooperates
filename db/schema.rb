@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20130402051101) do
     t.date    "date"
   end
 
-  create_table "inventory", :force => true do |t|
+  create_table "inventories", :force => true do |t|
     t.integer "user_id"
     t.integer "ingredient_id"
     t.date    "purchase_date"
