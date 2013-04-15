@@ -133,7 +133,7 @@ var line = d3.svg.line()
 
 	<h3>List of Foods:</h3>
 	<% @user.food.each do |item| %> 
-		<h4><%= item.fname %></h4>
+		<%= item.fname %><br>
 	<% end %>
 	<% if @user.food.nil? || @user.food.empty? %>
 	  No foods added yet.
@@ -173,78 +173,12 @@ var line = d3.svg.line()
 </br>
 <!--start of IFP-->
 <% if current_user.id == @user.id %>
-<h1>Inward Facing Profile</h1>
-<h2>user>>food:</h2>
-<ul>
-<% @user.food.each do |item| %>
-   <% @var = item %>
-  <li> <%= best_in_place @var, :fname %></li>
-<% end %>
-</ul>
-
-<h2>user, ingredients>>inventory:</h2>
-<ul>
-<% @user.inventory.each do |inventory| %>
-   <% @inventory = inventory %>
-  <% @user.ingredient.each do |ingredient| %>
-      <% @ingredient = ingredient %>
-      <li>ingredient name | quantity_left</li>
-      <li><%= best_in_place @ingredient, :ingredient_name, :path => user_path  %>
-      <%= best_in_place @inventory, :quantity_left, :path => user_path  %></li>
-  <% end %>
-<% end %>
-</ul>
-
-<h2>users>>inventory>>ingredients:</h2>
-  <ul>
-  <% @user.ingredient.each do |item| %>
-      <% @var = item %>
-      <li>ingredient name | current price</li>
-      <li><%= best_in_place @var, :ingredient_name, :path => user_path  %>
-      <%= best_in_place @var, :current_price, :path => user_path  %></li>
-  <% end %>
-  </ul>
-<!--//////////////////////////ABOVE=FINISHED:::BELOW=IN-PROGRESS//////////////////////////////-->
-  <h2>users>>food, inventory, ingredients>>recipe:</h2>
-  <ul>
-    food name | amount used | quantity left | ingredient name
-    <% @user.food.each do |food| %>
-      <% if current_user.id == food.user_id %>
-        <% @food = food%>
-        <%= best_in_place @food, :fname %>
-        
-        <% @user.recipe.each do |recipe| %>
-          <% if food.id == recipe.food_id %>
-            <% @recipe = recipe %>
-            <%= best_in_place @recipe, :amt_used %>
-
-            <% @user.inventory.each do |inventory| %>
-              <% if recipe.inventory_id == inventory.id %>
-                <% @inventory = inventory %>
-                <%= best_in_place @inventory, :quantity_left %>
-
-                <% @user.ingredient.each do |ingredient| %>
-                  <% if ingredient.inventory_id == inventory.id %>
-                    <% @ingredient = ingredient %>
-                    <%= best_in_place @ingredient, :ingredient_name %>
-    </li> 
-                  <% end %>
-                <% end %>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-
-  </ul>
-
-  <h2>users, ingredients>>sells:</h2>
-  <ul>
-
-</ul>
-
-
-<!-- end of IFP-->
+	<h1>Inward Facing Profile</h1>
+	<h2>user>>food:</h2>
+	<ul>
+	<% @user.food.each do |item| %>
+		<li> <%= item.fname %></li>
+	<% end %>
+	</ul>
 <% end %>
 </div>

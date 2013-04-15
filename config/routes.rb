@@ -7,6 +7,8 @@ Cooperates::Application.routes.draw do
   collection { get :search, to: 'users#search', :as => 'users_search' }
 end
 
+		match 'users/:id/food' => 'foods#index', :as => :foods_show
+
     resources :users
     resources :foods
     resources :inventories
@@ -21,9 +23,8 @@ end
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 	match 'users/search' => 'users#search'
-	match 'users/:id/food' => 'foods#index', :as => 'foods_show'
+	
 	match 'users/:id/food/new' => 'foods#new', :as => 'new_food'
-	match '/foods/:id' => redirect('www.google.com')
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)

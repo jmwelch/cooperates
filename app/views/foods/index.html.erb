@@ -7,7 +7,9 @@
 <% else %>
 	<% @food.each do |food| %>
 		<%= food.fname %>
-		<%= food.price %>
+		<%= food.price %><br>
 	<% end %>
+	<br>
+	<p><%= link_to "Add food?", new_food_path %></p>
 <% end %>
 
