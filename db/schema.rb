@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(:version => 20130402051101) do
   add_index "activities", ["trackable_id"], :name => "index_activities_on_trackable_id"
   add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
 
+  create_table "foods", :primary_key => "food_id", :force => true do |t|
+    t.integer "user_id"
+    t.string  "fname"
+    t.integer "price"
+  end
+
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
