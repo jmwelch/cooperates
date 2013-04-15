@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20130402051101) do
     t.date    "purchase_date"
     t.integer "purchase_price"
     t.float   "quantity_bought"
-    t.float   "quanity_left"
+    t.float   "quantity_left"
   end
 
   create_table "recipe", :force => true do |t|
