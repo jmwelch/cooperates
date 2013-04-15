@@ -9,4 +9,11 @@ def link_to_add_fields(name, f, type)
   link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
 end
 
+module ApplicationHelper
+  # this method will embed the code from the partial
+  def youtube_video(url)
+    render :partial => 'shared/video', :locals => { :url => url }
+  end 
+end
+
 end

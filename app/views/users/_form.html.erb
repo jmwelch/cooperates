@@ -1,0 +1,46 @@
+<div class="container"><%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this User from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </div>
+  <div class="field">
+    <%= f.label :user_type %>
+    <%= f.select :user_type, [[''], ['restaurant', 'restaurant'], ['supplier', 'supplier']] %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description, :rows=>'5'%>
+  </div>
+  <div class="field">
+    <%= f.label :price_range %>
+    <%= f.text_field :price_range %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Update User", :class=>'btn' %>
+  </div>
+<% end %>
+
+<br><br>
+<% if !@food.nil? && !@food.empty? %>
+	<%= form_for(@food) do |f| %>
+		<div class="field">
+		  <%= f.label :fname %>
+		  <%= f.text_field :fname %>
+		</div>
+	<% end %>
+<% else %>
+<% end %>
+</div>
+

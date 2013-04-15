@@ -48,13 +48,14 @@ ActiveRecord::Schema.define(:version => 20130402051101) do
 
   create_table "inventories", :force => true do |t|
     t.integer "user_id"
+    t.integer "ingredient_id"
     t.date    "purchase_date"
     t.integer "purchase_price"
     t.float   "quantity_bought"
-    t.float   "quantity_left"
+    t.float   "quanity_left"
   end
 
-  create_table "recipes", :force => true do |t|
+  create_table "recipe", :force => true do |t|
     t.integer "food_id"
     t.integer "inventory_id"
     t.float   "amt_used"

@@ -1,14 +1,10 @@
 Cooperates::Application.routes.draw do
   resources :activities
-
-
   resources :friendships
-
-
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions" }
 
   resources :users do 
-  collection { get :search, to: 'users#search' }
+  collection { get :search, to: 'users#search', :as => 'users_search' }
 end
 
     resources :users
@@ -17,17 +13,18 @@ end
     resources :ingredients
     resources :recipes
     resources :sells
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-
+		match 'users/search' => 'users#search'
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
-
+  
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
@@ -62,12 +59,16 @@ end
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
-  #   end
-
+  #   end  
+  
+  #authenticated :user do
+  #  root :to => "users#index"
+  #end
+  
   # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
-   root :to => 'users#index'
+  # just remember to delete public/index.html. 
+   root :to => 'welcome#index'
+  # root :to => 'users#index'
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
