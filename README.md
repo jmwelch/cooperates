@@ -2,6 +2,5 @@
 
 
 To-Do (for Neil):<br>
--Implement navbar search fix<br>
 -Neatify IFP<br>
--Revamp welcome page<br>
+-More D3 vis<br>
