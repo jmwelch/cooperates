@@ -8,6 +8,26 @@
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
 
+.iframe{
+	margin-left: 29% !important;
+
+}
+
+.logo {
+	width: 450px;
+	height: 100px !important;
+	margin-left: 29%;
+	margin-top: 15%;
+	margin-right: auto;
+	display: block;
+	max-width: 100%;
+
+}
+
+.carousel_image{
+	min-width: 100%;
+}
+
 .text_area{
 	height: 40px;
 }

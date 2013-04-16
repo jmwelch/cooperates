@@ -1,4 +1,4 @@
-<div class="field">
+<div class="container"><div class="field">
   <%= f.attribute_fields do |a| %>
     <%= a.attribute_select associations: [:category] %>
   <% end %>
@@ -7,4 +7,4 @@
     <%= v.text_field :value %>
   <% end %>
   <%= link_to "remove", '#', class: "remove_fields" %>
-</div>
+</div></div>

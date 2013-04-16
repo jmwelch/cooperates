@@ -1,21 +1,142 @@
-<br>
+<div class="container">
+<br><br>
+<div id="graph"><h2><%= @user.user_type.capitalize %> Data</h2></div>
+<style>
+  path {
+      stroke: steelblue;
+      stroke-width: 2;
+      fill: none;
+  }
+ 
+  line {
+      stroke: black;
+  }
+ 
+  text {
+      font-family: Arial;
+      font-size: 9pt;
+  }
+	
+	.axis {
+	  shape-rendering: crispEdges;
+	}
+
+	.x.axis line {
+	  stroke: lightgrey;
+	}
+
+  .x.axis path {
+  	stroke: #000;
+  }
+
+	.x.axis .minor {
+	  stroke-opacity: .5;
+	}
+
+	.y.axis line, .y.axis path {
+	  fill: none;
+	  stroke: #000;
+	}
+</style>
+
+<script type="text/javascript">
+/* implementation heavily influenced by http://bl.ocks.org/1166403 */
+
+// define dimensions of graph
+var m = [80, 80, 80, 80]; // margins
+var w = 1000 - m[1] - m[3]; // width
+var h = 400 - m[0] - m[2]; // height
+
+// create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
+var data = [3, 6, 2, 7, 5, 2, 0, 3, 8, 9, 2, 5, 9, 3, 6, 3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 2, 7];
+
+// X scale will fit all values from data[] within pixels 0-w
+var x = d3.scale.linear().domain([0, data.length]).range([0, w]);
+// Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
+var y = d3.scale.linear().domain([0, 10]).range([h, 0]);
+	// automatically determining max range can work something like this
+	// var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
+
+// create a line function that can convert data[] into x and y points
+var line = d3.svg.line()
+	// assign the X function to plot our line as we wish
+	.x(function(d,i) { 
+		// verbose logging to show what's actually being done
+		console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
+		// return the X coordinate where we want to plot this datapoint
+		return x(i); 
+	})
+	.y(function(d) { 
+		// verbose logging to show what's actually being done
+		console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
+		// return the Y coordinate where we want to plot this datapoint
+		return y(d); 
+	})
+	
+	// Add an SVG element with the desired dimensions and margin.
+	var graph = d3.select("#graph").append("svg:svg")
+	      .attr("width", w + m[1] + m[3])
+	      .attr("height", h + m[0] + m[2])
+	    .append("svg:g")
+	      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+	// create yAxis
+	var xAxis = d3.svg.axis().scale(x).tickSize(-h).tickSubdivide(true);
+	// Add the x-axis.
+	graph.append("svg:g")
+	      .attr("class", "x axis")
+	      .attr("transform", "translate(0," + h + ")")
+	      .call(xAxis);
+  
+  graph.append("text")      // text label for the x axis
+                .attr("x", 425 )
+                .attr("y",  270 )
+                .style("text-anchor", "middle")
+                .text("Ingredient #");
+                
+	// create left yAxis
+	var yAxisLeft = d3.svg.axis().scale(y).ticks(4).orient("left");
+	// Add the y-axis to the left
+	graph.append("svg:g")
+	      .attr("class", "y axis")
+	      .attr("transform", "translate(-25,0)")
+	      .call(yAxisLeft);
+	      
+  graph.append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", -5)
+          .attr("x", -110)
+          .style("text-anchor", "middle")
+          .text("Quantity Left");
+	      	
+		// Add the line by appending an svg:path element with the data line we created above
+	// do this AFTER the axes above so that the line is above the tick-lines
+		graph.append("svg:path").attr("d", line(data));
+		
+	
+</script>
+
+
 <h1><%= best_in_place @user, :username %>'s page</h1>
 <ul>
 	<h3>Username:</h3>
-	<h4><%= @user.username %></h4>
+	<%= @user.username %>
 
 	<h3>User type:</h3>
-	<h4><%= @user.user_type %></h4>
+	<%= @user.user_type %>
 
 	<h3>Description:</h3>
-	<h4><%= raw @user.description %></h4>
+	<%= raw @user.description %>
 
 	<h3>Price Range:</h3>
-	<h4><%= @user.price_range %></h4>
+	<%= @user.price_range %>
 
 	<h3>List of Foods:</h3>
 	<% @user.food.each do |item| %> 
-		<h4><%= item.fname %></h4>
+		<%= link_to item.fname, food_path(:id => item.food_id) %><br>
+	<% end %>
+	<% if @user.food.nil? || @user.food.empty? %>
+	  No foods added yet.
 	<% end %>
 </ul>
 <% if current_user.id == @user.id %>
@@ -39,85 +160,25 @@
 <h2>Friended by Users</h2>
 <ul>
   <% for user in @user.inverse_friends %>
-    <li><%=h user.username %></li>
+    <li><%= user.username %></li>
   <% end %>
 </ul>
+  <% if @users.nil? || @users.empty? %>
+    You have no friends at this time.
+  <%end%>
+
+
 </br>
 </br>
 </br>
 <!--start of IFP-->
 <% if current_user.id == @user.id %>
-<h1>Inward Facing Profile</h1>
-<h2>user>>food:</h2>
-<ul>
-<% @user.food.each do |item| %>
-   <% @var = item %>
-  <li> <%= best_in_place @var, :fname %></li>
+	<h1>Inward Facing Profile</h1>
+	<h2>user>>food:</h2>
+	<ul>
+	<% @user.food.each do |item| %>
+		<li> <%= item.fname %></li>
+	<% end %>
+	</ul>
 <% end %>
-</ul>
-
-<h2>user, ingredients>>inventory:</h2>
-<ul>
-<% @user.inventory.each do |inventory| %>
-   <% @inventory = inventory %>
-  <% @user.ingredient.each do |ingredient| %>
-      <% @ingredient = ingredient %>
-      <li>ingredient name | quantity_left</li>
-      <li><%= best_in_place @ingredient, :ingredient_name, :path => user_path  %>
-      <%= best_in_place @inventory, :quantity_left, :path => user_path  %></li>
-  <% end %>
-<% end %>
-</ul>
-
-<h2>users>>inventory>>ingredients:</h2>
-  <ul>
-  <% @user.ingredient.each do |item| %>
-      <% @var = item %>
-      <li>ingredient name | current price</li>
-      <li><%= best_in_place @var, :ingredient_name, :path => user_path  %>
-      <%= best_in_place @var, :current_price, :path => user_path  %></li>
-  <% end %>
-  </ul>
-<!--//////////////////////////ABOVE=FINISHED:::BELOW=IN-PROGRESS//////////////////////////////-->
-  <h2>users>>food, inventory, ingredients>>recipe:</h2>
-  <ul>
-    food name | amount used | quantity left | ingredient name
-    <% @user.food.each do |food| %>
-      <% if current_user.id == food.user_id %>
-        <% @food = food%>
-        <%= best_in_place @food, :fname %>
-        
-        <% @user.recipe.each do |recipe| %>
-          <% if food.id == recipe.food_id %>
-            <% @recipe = recipe %>
-            <%= best_in_place @recipe, :amt_used %>
-
-            <% @user.inventory.each do |inventory| %>
-              <% if recipe.inventory_id == inventory.id %>
-                <% @inventory = inventory %>
-                <%= best_in_place @inventory, :quantity_left %>
-
-                <% @user.ingredient.each do |ingredient| %>
-                  <% if ingredient.inventory_id == inventory.id %>
-                    <% @ingredient = ingredient %>
-                    <%= best_in_place @ingredient, :ingredient_name %>
-    </li> 
-                  <% end %>
-                <% end %>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-
-  </ul>
-
-  <h2>users, ingredients>>sells:</h2>
-  <ul>
-
-</ul>
-
-
-<!-- end of IFP-->
-<% end %>
+</div>
