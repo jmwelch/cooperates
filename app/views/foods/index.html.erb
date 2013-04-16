@@ -1,0 +1,15 @@
+<div class="container">
+<br><br><br>
+
+<% if @food.empty? %>
+	<p>No Foods found!</p>
+	<p><%= link_to "Add food?", new_food_path %></p>
+<% else %>
+	<% @food.each do |food| %>
+		<%= food.fname %>
+		<%= food.price %><br>
+	<% end %>
+	<br>
+	<p><%= link_to "Add food?", new_food_path %></p>
+<% end %>
+
