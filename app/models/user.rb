@@ -30,4 +30,10 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :user_type, :description, :price_range, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
+
+  def self.import(file)
+    CSV.foreach(file.path) do |row|
+     User.create! row.to_hash
+    end
+  end
 end

@@ -48,4 +48,9 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to users_url
   end
+
+  def import
+    User.import(params[:file])
+    redirect_to users_url, notice: "Products imported"
+  end
 end

@@ -4,8 +4,9 @@ Cooperates::Application.routes.draw do
   devise_for :users
 
   resources :users do 
-  collection { get :search, to: 'users#search', :as => 'users_search' }
-end
+    collection { get :search, to: 'users#search', :as => 'users_search' }
+    collection { post :import }
+  end
 
     resources :users
     resources :foods
