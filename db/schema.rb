@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20130402051101) do
     t.float   "quantity_left"
   end
 
-  create_table "recipe", :force => true do |t|
+  create_table "recipes", :force => true do |t|
     t.integer "food_id"
     t.integer "inventory_id"
     t.float   "amt_used"

@@ -11,7 +11,7 @@
   <body>
 
      <div id="nav_bar" class="navbar navbar-fixed-top navbar-inverse">
-        <div class="navbar-inner"  style="height: 48px;">
+        <div class="navbar-inner"  style="height: 58px;">
           <div class="container">
             <a class="brand" href="/">
               <%= image_tag 'coop.png', :style => 'margin-top:1.5px', :width => '120'%>
@@ -32,18 +32,12 @@
               
             </ul>
             
- 
             <%= form_for(resource, :as => resource_name, :url => user_session_path, :html => { :class =>
             'navbar-form pull-right'} ) do |f| %>
               <%= f.email_field :email, :autofocus => true, :placeholder=>'Email', :class => 'span2' %>
               <%= f.password_field :password, :autofocus=>true, :placeholder=>'Password', :class => 'span2' %>
               <%= f.submit "Sign in", :class => 'btn' %>
             <% end %>
-
-
-            
-
-          
             
           </div>
         </div>

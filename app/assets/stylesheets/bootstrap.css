@@ -8,10 +8,7 @@
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
 
-.iframe{
-	margin-left: 29% !important;
 
-}
 
 p{
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -4440,7 +4437,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .brand {
   display: block;
   float: left;
-  padding: 10px 20px 10px;
+  padding: 10px 10px 0px;
   margin-left: -20px;
   font-size: 20px;
   font-weight: 200;
@@ -4489,6 +4486,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar-form {
+	margin-top: 5px;
   margin-bottom: 0;
   *zoom: 1;
 }
