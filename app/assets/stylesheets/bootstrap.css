@@ -13,6 +13,10 @@
 
 }
 
+p{
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 .logo {
 	width: 450px;
 	height: 100px !important;
