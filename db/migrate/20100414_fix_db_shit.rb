@@ -5,6 +5,5 @@ class FixDbShit < ActiveRecord::Migration
   
   def self.down
      rename_column :inventories, :quanity_left, :quantity_left
-
   end
 end
