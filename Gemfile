@@ -7,12 +7,9 @@ gem 'rails', '3.2.12'
 
 group :production do
   gem 'pg'
-  gem 'taps', :require => false
 end
 group :development, :test do
-  gem 'sqlite3'
-  gem 'taps', :require => false
-  
+  gem 'sqlite3'  
 end
 
 gem 'seed-fu', '~> 2.2.0'
