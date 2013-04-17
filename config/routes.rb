@@ -9,6 +9,7 @@ Cooperates::Application.routes.draw do
   end
 
 		match 'users/:id/food' => 'foods#index', :as => :foods_show
+		match 'users/:id/inventory' => 'inventories#index', :as => :inventory_show
 
     resources :users
     resources :foods
@@ -24,8 +25,8 @@ Cooperates::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 	match 'users/search' => 'users#search'
-	
 	match 'users/:id/food/new' => 'foods#new', :as => 'new_food'
+	match 'users/:id/inventory/new' => 'inventories#new', :as => 'new_inventory'
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)

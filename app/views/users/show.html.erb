@@ -165,7 +165,7 @@ var line = d3.svg.line()
 </ul>
   <% if @users.nil? || @users.empty? %>
     You have no friends at this time.
-  <%end%>
+  <% end %>
 
 
 </br>
@@ -174,11 +174,20 @@ var line = d3.svg.line()
 <!--start of IFP-->
 <% if current_user.id == @user.id %>
 	<h1>Inward Facing Profile</h1>
-	<h2>user>>food:</h2>
-	<ul>
+	<h2>User->Food</h2>
 	<% @user.food.each do |item| %>
-		<li> <%= item.fname %></li>
+		<%= item.fname %><br>
 	<% end %>
-	</ul>
+
+	<h2>User->Inventory</h2>
+	<% @user.inventory.each do |item| %>
+		<% item.ingredients.each do |ing| %>
+			<%= ing.ingredient_name %>
+		<% end %>
+		$<%= item.purchase_price %><br>
+	<% end %>
 <% end %>
+
+
+<!-- end of IFP-->
 </div>
