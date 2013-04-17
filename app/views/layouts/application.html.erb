@@ -24,19 +24,21 @@
               <% if user_signed_in? %>
                 <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
                 <li><%= link_to 'Search', users_search_path %></li>
-                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
               <% else %>
                 <li><%= link_to "Sign up", new_user_registration_path %></li>
                 <li><%= link_to "Login", new_user_session_path %></li>
               <% end %>
               
             </ul>
-            
-            <%= form_for(resource, :as => resource_name, :url => user_session_path, :html => { :class =>
-            'navbar-form pull-right'} ) do |f| %>
-              <%= f.email_field :email, :autofocus => true, :placeholder=>'Email', :class => 'span2' %>
-              <%= f.password_field :password, :autofocus=>true, :placeholder=>'Password', :class => 'span2' %>
-              <%= f.submit "Sign in", :class => 'btn' %>
+            <% if !user_signed_in? %>
+              <%= form_for(resource, :as => resource_name, :url => user_session_path, :html => { :class =>
+              'navbar-form pull-right'} ) do |f| %>
+                <%= f.email_field :email, :autofocus => true, :placeholder=>'Email', :class => 'span2' %>
+                <%= f.password_field :password, :autofocus=>true, :placeholder=>'Password', :class => 'span2' %>
+                <%= f.submit "Sign in", :class => 'btn' %>
+              <% end %>
+            <% else %>
+              <p class="pull-right" style="color: #FFFFFF; padding-top: 15px;">Logged in as <%= link_to current_user.username, current_user %> -- <%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
             <% end %>
             
           </div>
