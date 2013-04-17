@@ -5,7 +5,7 @@ class RecreateFoods < ActiveRecord::Migration
       t.integer "user_id"
       t.string  "fname"
       t.integer "price"
-    end
+     end
   end
   
   def self.down
