@@ -144,7 +144,7 @@ var line = d3.svg.line()
 
     <br>
     <% if current_user.id == @user.id %>
-    	<p><%= link_to 'Edit Profile', edit_user_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
+    	<p><%= link_to 'Edit Profile', edit_user_path, {:class => 'edit_link', :style => 'font-size:45px !important;'} %></p>
     <% end %>
     <br>
   </div>

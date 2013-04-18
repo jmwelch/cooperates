@@ -1,12 +1,26 @@
 <div class='container'>
 <br><br><br>
-<% if !@inventory.empty? %>
-	<% @inventory.each do |inv| %>
-		<%= inv.ingredients.first.ingredient_name %>
-		bought for $<%= inv.purchase_price %><br>
-	<% end %>
-<% else %>
-	<p>No inventories found!</p>
-<% end %>
-<br>
-<%= link_to 'Add to inventory?', new_inventory_path %>
+
+
+  	<h2>List of Inventory Items</h2>
+  	<% if @inventory.empty? %>
+      <p>No inventories found!</p>
+  	<% else %>
+    	<table class="table table-bordered">
+      		  <tr>
+      		    <th> Ingredient </th>
+      		    <th> Bought For </th>
+      		  </tr>
+      			<% @inventory.each do |inv| %>
+        		  <tr>
+        		    <td><%= inv.ingredients.first.ingredient_name %></td>
+        		    <td><%= inv.purchase_price %></td>
+        		 </tr>
+           <% end %>
+      </table>
+  	<% end %>
+  	<br>
+  	<p><%= link_to 'Add to inventory?', new_inventory_path, :class =>'edit_link', :style => 'font-size: 25px;' %><br><br>
+    <%= link_to "Back to Last Page", :back %></p>
+
+  </div>

@@ -7,10 +7,14 @@
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
+@import url(http://fonts.googleapis.com/css?family=Doppio+One);
 
+a.edit_link {
+	font-family: 'Doppio One', sans-serif;
+	color: #728FCE;
+}
 
-
-p{
+p {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 

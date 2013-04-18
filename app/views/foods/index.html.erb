@@ -1,15 +1,25 @@
 <div class="container">
 <br><br><br>
-
-<% if @food.empty? %>
-	<p>No Foods found!</p>
-	<p><%= link_to "Add food?", new_food_path %></p>
-<% else %>
-	<% @food.each do |food| %>
-		<%= food.fname %>
-		<%= food.price %><br>
+	
+	<h2>List of Foods</h2>
+	<% if @food.empty? %>
+    <p>No Foods found!</p>
+	<% else %>
+  	<table class="table table-bordered">
+    		  <tr>
+    		    <th> Food Name </th>
+    		    <th> Quantity </th>
+    		  </tr>
+    			<% @food.each do |food| %>
+      		  <tr>
+      		    <td><%= food.fname %></td>
+      		    <td><%= food.price %></td>
+      		 </tr>
+         <% end %>
+    </table>
 	<% end %>
 	<br>
-	<p><%= link_to "Add food?", new_food_path %></p>
-<% end %>
+	<p><%= link_to "Add food?", new_food_path, :class =>'edit_link', :style => "font-size: 25px;" %><br><br>
+  <%= link_to "Back to Last Page", :back %></p>
 
+</div>
