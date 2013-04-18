@@ -112,94 +112,71 @@ var line = d3.svg.line()
 		// Add the line by appending an svg:path element with the data line we created above
 	// do this AFTER the axes above so that the line is above the tick-lines
 		graph.append("svg:path").attr("d", line(data));
+		
+	
 </script>
-<div class="row">
-  <div class="span7">
-    <h1><%= best_in_place @user, :username %>'s page</h1>
-    <ul>
-    	<h3>Username:</h3>
-    	<%= @user.username %>
 
-    	<h3>User type:</h3>
-    	<%= @user.user_type %>
 
-    	<h3>Description:</h3>
-    	<%= raw @user.description %>
+<h1><%= best_in_place @user, :username %>'s page</h1>
+<ul>
+	<h3>Username:</h3>
+	<%= @user.username %>
 
-    	<h3>Price Range:</h3>
-    	<%= @user.price_range %>
+	<h3>User type:</h3>
+	<%= @user.user_type %>
+
+	<h3>Description:</h3>
+	<%= raw @user.description %>
+
+	<h3>Price Range:</h3>
+	<%= @user.price_range %>
+
 	
-	
-	  <% if @user.user_type.include?("both")%>
-	    <%= render "shared/rest_front" %>
-      <%= render "shared/supplier_front" %>
-	  <% else %>
-      <% if @user.user_type.include?("rest") %>
-        <%= render "shared/rest_front" %>
-      <% else %>
-        <%= render "shared/supplier_front" %>
-      <% end %>
-    <% end %>
-    </ul> 
-
-    <br>
-    <% if current_user.id == @user.id %>
-    	<p><%= link_to 'Edit Profile', edit_user_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
-    <% end %>
-    <br>
-  </div>
-  
-  <div class="span5">
-
-    <h1>Friends</h1>
-    <ul>
-      <% for friendship in @user.friendships %>
-        <li>
-          <%=h friendship.friend.username %>
-          (<%= link_to "remove", friendship, :method => :delete %>)
-        </li>
-      <% end %>
-    </ul>
-
-    <% if current_user.id == @user.id %>
-    	<p><%= link_to "Find Friends", users_search_path %></p>
-    <% end %>
-
-    <h2>Friended by Users</h2>
-    <ul>
-      <% for user in @user.inverse_friends %>
-        <li><%= user.username %></li>
-      <% end %>
-    </ul>
-      <% if @users.nil? || @users.empty? %>
-        You have no friends at this time.
-      <% end %>
-    </br>
-    </br>
-    </br>
-<!--start of IFP-->
+	<% if @user.food.nil? || @user.food.empty? %>
+	  No foods added yet.
+	<% end %>
+</ul>
 <% if current_user.id == @user.id %>
-	<h1>Inward Facing Profile</h1>
-	<h2>User->Food</h2>
-	<% @user.food.each do |item| %>
-		<%= item.fname %><br>
-	<% end %>
-
-	<h2>User->Inventory</h2>
-	<% @user.inventory.each do |item| %>
-		<% item.ingredients.each do |ing| %>
-			<%= ing.ingredient_name %>
-		<% end %>
-		$<%= item.purchase_price %><br>
-	<% end %>
+	<p><%= link_to 'Edit Profile', edit_user_path %></p>
 <% end %>
 
-<h2>Import Products</h2>
-	<%= form_tag import_users_path, multipart: true do %>
-	<p>Select a file and press "Import" to import!</p>
- 		<%= file_field_tag :file %><br>
-		<%= submit_tag "Import", {:class=>'btn'} %>
-	<% end %>
-<!-- end of IFP-->
-</div>
-</div>
+<h2>Friends</h2>
+<ul>
+  <% for friendship in @user.friendships %>
+    <li>
+      <%=h friendship.friend.username %>
+      (<%= link_to "remove", friendship, :method => :delete %>)
+    </li>
+  <% end %>
+</ul>
+
+<% if current_user.id == @user.id %>
+	<p><%= link_to "Find Friends", users_search_path %></p>
+<% end %>
+
+<h2>Friended by Users</h2>
+<ul>
+  <% for user in @user.inverse_friends %>
+    <li><%= user.username %></li>
+  <% end %>
+</ul>
+  <% if @users.nil? || @users.empty? %>
+    You have no friends at this time.
+  <%end%>
+
+
+
+</br>
+</br>
+</br>
+<!--start of IFP-->
+
+
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}" %>
+
+<h3>Nearby locations</h3>
+<ul>
+<% for location in @user.nearbys(10) %>
+  <li><%= link_to location.address, location %> (<%= location.distance.round(2) %> miles)</li>
+<% end %>
+</ul>

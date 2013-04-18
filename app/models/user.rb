@@ -1,6 +1,16 @@
 class User < ActiveRecord::Base
 	set_primary_key :id
 
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  validates_uniqueness_of :username
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :username, :user_type, :description, :price_range,:address, :latitude, :longitude, :email, :password, :password_confirmation, :remember_me
+  # attr_accessible :title, :body
+
   has_many :friendships
   has_many :friends, :through => :friendships
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
@@ -19,21 +29,14 @@ class User < ActiveRecord::Base
   has_many :recipe, :through => :food
 ###########################
 
-
-
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  validates_uniqueness_of :username
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :user_type, :description, :price_range, :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
-
-  def self.import(file)
-    CSV.foreach(file.path) do |row|
-     User.create! row.to_hash
-    end
+  UNRANSACKABLE_ATTRIBUTES = ["id", "encrypted_password","reset_password_token", "reset_password_sent_at", "remember_created_at",
+    "sign_in_count", "current_sign_in_at", "last_sign_in_at", "current_sign_in_ip", "last_sign_in_ip",
+    "created_at", "updated_at" ]
+  def self.ransackable_attributes auth_object = nil
+    (column_names - UNRANSACKABLE_ATTRIBUTES) + _ransackers.keys
   end
+
+  geocoded_by :address
+  after_validation :geocode, :if => :address_changed?
+  
 end

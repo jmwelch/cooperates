@@ -4,16 +4,23 @@
 <br>
 <br>
 
-<%= search_form_for @search, url: users_search_path do |f| %>
+<%= search_form_for @search, url: users_search_path, method: :get do |f| %>
+  <%= f.condition_fields do |c| %>
+    <%= render "condition_fields", f: c %>
+  <% end %>
+  <p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
   <div class="field">
-    <%= f.label :email_cont, "Name contains" %>
-    <%= f.text_field :email_cont %>
+    Sort:
+    <%= f.sort_fields do |s| %>
+      <%= s.sort_select %>
+    <% end %>
   </div>
-  <div class="actions"><%= f.submit "Search", :class=>"btn" %></div>
+  <div class="actions"><%= f.submit "Search" %></div>
 <% end %>
 
 <div>
-<% if @search.inspect != 'Ransack::Search<class: User, base: Grouping <combinator: and>>' %>
+<% @search.inspect%>
+<% if @search.inspect != 'Ransack::Search<class: User, base: Grouping <conditions: [Condition <attributes: [nil], predicate: eq, values: [nil]>, Condition <attributes: [nil], predicate: eq, values: [nil]>], combinator: and>>' %>
 <% if !@users.nil? && !@users.empty? %>
 		<table class="table table-bordered">
 		  <tr>
@@ -38,4 +45,14 @@
   <% end %>
 <% end %>
 </div>
+
+<%= form_tag users_search_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search Near", :name => nil %>
+  </p>
+<% end %>
 </div>
+
+
+

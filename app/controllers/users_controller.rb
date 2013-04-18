@@ -8,16 +8,27 @@ class UsersController < ApplicationController
   end
 
   def search
-    @search =User.search(params[:q])
-    @users = @search.result
+    @search = User.search(params[:q])
+  @users = @search.result
+  @search.build_condition if @search.conditions.empty?
+  @search.build_sort if @search.sorts.empty?
 
- # @search.build_condition if @search.conditions.empty?
- # @search.build_sort if @search.sorts.empty?
-  end    
 
+if params[:search].present?
+    @locations = User.near(params[:search], 50, :order => :distance)
+  else
+    @locations = User.all
+end
+
+end
   def show
     @user = User.find(params[:id])
-    
+
+    if params[:search].present?
+    @locations = User.near(params[:search], 50, :order => :distance)
+  else
+    @locations = User.all
+end
   end
 
   def new
@@ -47,10 +58,5 @@ class UsersController < ApplicationController
     @user = user.find(params[:id])
     @user.destroy
     redirect_to users_url
-  end
-
-  def import
-    User.import(params[:file])
-    redirect_to users_url, notice: "Products imported"
   end
 end
