@@ -185,13 +185,14 @@ var line = d3.svg.line()
 		<%= item.fname %><br>
 	<% end %>
 
+
 	<h2>User->Inventory</h2>
 	<% @user.inventory.each do |item| %>
 		<% item.ingredients.each do |ing| %>
 			<%= ing.ingredient_name %>
 		<% end %>
 		$<%= item.purchase_price %><br>
-	<% end %>
+	<% end %> 
 <% end %>
 
 <h2>Import Products</h2>
