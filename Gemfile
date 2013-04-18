@@ -12,6 +12,7 @@ group :development, :test do
   gem 'sqlite3'  
 end
 
+gem 'sqlite3'  
 gem 'seed-fu', '~> 2.2.0'
 gem 'devise'
 gem 'best_in_place'
