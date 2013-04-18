@@ -25,8 +25,7 @@ ActiveRecord::Schema.define(:version => 20130402051101) do
   add_index "activities", ["trackable_id"], :name => "index_activities_on_trackable_id"
   add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
 
-  create_table "foods", :id => false, :force => true do |t|
-    t.integer "id",      :null => false
+  create_table "foods", :primary_key => "food_id", :force => true do |t|
     t.integer "user_id"
     t.string  "fname"
     t.integer "price"
@@ -52,10 +51,10 @@ ActiveRecord::Schema.define(:version => 20130402051101) do
     t.date    "purchase_date"
     t.integer "purchase_price"
     t.float   "quantity_bought"
-    t.float   "quanity_left"
+    t.float   "quantity_left"
   end
 
-  create_table "recipe", :force => true do |t|
+  create_table "recipes", :force => true do |t|
     t.integer "food_id"
     t.integer "inventory_id"
     t.float   "amt_used"

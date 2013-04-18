@@ -1,0 +1,6 @@
+<div class='container'>
+<br><br><br>
+<%= @inventory.ingredients.last.ingredient_name%>
+$<%= @inventory.purchase_price %><br>
+
+<%= link_to "Inventory", inventory_show_path(:id => current_user.id) %>

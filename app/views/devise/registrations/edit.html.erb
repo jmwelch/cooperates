@@ -24,26 +24,17 @@
   <div><%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+  <div><%= f.label :current_password %><i>(we need your current password to confirm your changes)</i>
   <%= f.password_field :current_password %></div>
-
-  <div><%= f.label :user_type %>
-  <%= f.select :user_type, [['restaurant'],['supplier'],['both']] %></div>
-
-  <div><%= f.label :description %>
-  <%= f.text_area :description, {:rows => '5'} %></div>
-
-  <div><%= f.label :price_range %>
-  <%= f.text_field :price_range %></div>
 
   <div><%= f.submit "Update", {:class => 'btn'} %></div>
 <% end %>
 <%= link_to "Back to Last Page", :back %>
 </div>
 <div class="span6">
-<h2>Cancel my account</h2>
+<h2>Close Account</h2>
 
-<p>Unhappy? :( <%= button_to "Cancel my account", registration_path(resource_name), :class => 'btn', :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+<p>Unhappy? :( </p><%= button_to "Close My Account", registration_path(resource_name), :class => 'btn', :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
 </div>
 
 

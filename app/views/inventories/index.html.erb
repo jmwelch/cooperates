@@ -1,0 +1,12 @@
+<div class='container'>
+<br><br><br>
+<% if !@inventory.empty? %>
+	<% @inventory.each do |inv| %>
+		<%= inv.ingredients.first.ingredient_name %>
+		bought for $<%= inv.purchase_price %><br>
+	<% end %>
+<% else %>
+	<p>No inventories found!</p>
+<% end %>
+<br>
+<%= link_to 'Add to inventory?', new_inventory_path %>
