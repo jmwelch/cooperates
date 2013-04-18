@@ -4,6 +4,12 @@ class InventoriesController < ApplicationController
 		@user = User.find(params[:id])
 		@inventory = @user.inventory
 		@list = []
+		@inventory.each do |inv|
+			ing = inv.ingredients
+			ing.each do |item|
+				@list.push(item)
+			end
+		end
 	end
 
 	def show
