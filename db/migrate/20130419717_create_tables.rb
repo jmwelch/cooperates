@@ -22,10 +22,6 @@ class CreateTables < ActiveRecord::Migration
       t.timestamps
      end
 
-     add_index :users, :username, :unique => true
-     add_index :users, :email, :unique => true
-     add_index :users, :reset_password_token, :unique => true
-     
      create_table :foods do |t|
        t.string :name
        t.integer :user_id
@@ -37,6 +33,7 @@ class CreateTables < ActiveRecord::Migration
        t.string :ingredient_name
        t.integer :user_id
        t.integer :food_id
+       t.integer :quantity_used
      end
      
      create_table :transactions do |t|
