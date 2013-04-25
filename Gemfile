@@ -15,7 +15,7 @@ end
 #gem "sqlite3", group: :sqlite3
 #gem "pg", group: :postgres
 
-gem 'therubyracer'
+# gem 'therubyracer'
 gem 'seed-fu', '~> 2.2.0'
 gem 'devise'
 gem 'best_in_place'
