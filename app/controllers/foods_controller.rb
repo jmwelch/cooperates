@@ -6,19 +6,19 @@ class FoodsController < ApplicationController
 	end
 
 	def show
-		@ingredient = Ingredient.find(params[:id])
+		@food = Food.find(params[:id])
 	end
 
 	def new
-		@ingredient = Ingredient.new
+		@food = Food.new
 	end
 
 	def create
-		@ingredient = Ingredient.new(params[:ingredient])
-		@ingredient.user_id = current_user.id
+		@food = Food.new(params[:food])
+		@food.user_id = current_user.id
 
-		if @ingredient.save
-			redirect_to @ingredient
+		if @food.save
+			redirect_to @food
 		else
 			render 'new'
 		end
