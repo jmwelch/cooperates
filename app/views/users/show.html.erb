@@ -140,21 +140,28 @@ var line = d3.svg.line()
     <br>
   </div>
   
-  <div class="span5">
-		<h1>IFP</h1>
-		<h2>Menu</h2>
-		<% @food.each do |f| %>
-			<%= link_to f.name, food_path(f) %>
-			$<%= number_with_precision(f.price, :precision => 2) %><br>
-		<% end %>
-		<h2>Ingredients Used</h2>
-		<% @ingredients.each do |i| %>
-			<%= i.ingredient_name %><br>
-		<% end %>
+<!-- Beginning of IFP -->
+	<% if current_user.id == @user.id %>
+		<div class="span5">
+			<h1>IFP</h1>
+			<h2>Menu</h2>
+			<% @food.each do |f| %>
+				<%= link_to f.name, food_path(f) %>
+				$<%= number_with_precision(f.price, :precision => 2) %><br>
+			<% end %>
+			<h2>Ingredients Used</h2>
+			<% @ingredients.each do |i| %>
+				<%= i.ingredient_name %><br>
+			<% end %>
 
+			<br><br>
 
-    </br>
-    </br>
-    </br>
-	</div>
+			<p><%= link_to 'Edit Inventory', stock_show_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
+
+		  </br>
+		  </br>
+		  </br>
+		</div>
+	<% end %>
+<!-- End of IFP -->
 </div>

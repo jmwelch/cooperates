@@ -1,0 +1,13 @@
+<div class='container'>
+<br><br><br>
+
+<% if @stock.empty? %>
+	<p>Inventory appears to be empty!</p>
+<% else %>
+	<% @stock.each do |s| %>
+		<%= s.ingredient_name %>
+	<% end %>
+<% end %>
+<br>
+<%= link_to "Add an item to your Inventory", 
+</div>

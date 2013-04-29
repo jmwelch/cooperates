@@ -1,0 +1,6 @@
+<div class='container'>
+<br><br><br>
+
+<%= @stock.ingredient_name %><br>
+<% link_to "View Inventory", stock_show_path(:id => current_user.id) %>
+</div>
