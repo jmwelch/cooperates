@@ -24,7 +24,7 @@ class CreateTables < ActiveRecord::Migration
        t.integer :sold_to
     end
     
-    create_table :stock do |t|
+    create_table :stocks do |t|
       t.string :ingredient_name
       t.integer :quantity
       t.integer :user_id
