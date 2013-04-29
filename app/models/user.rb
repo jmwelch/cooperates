@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
-	has_many :ingredients
-	has_many :foods
+	has_many :ingredients, :dependent => :destroy
+	has_many :foods, :dependent => :destroy
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
