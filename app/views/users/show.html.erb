@@ -145,7 +145,7 @@ var line = d3.svg.line()
 		<h2>Menu</h2>
 		<% @food.each do |f| %>
 			<%= f.name %>
-			$<%= f.price %><br>
+			$<%= number_with_precision(f.price, :precision => 2) %><br>
 		<% end %>
 		<h2>Ingredients Used</h2>
 		<% @ingredients.each do |i| %>

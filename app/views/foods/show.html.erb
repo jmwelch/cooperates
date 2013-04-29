@@ -1,7 +1,7 @@
 <div class="container">
 <br><br><br>
 <h1><%= @food.name %></h1>
-<h2>Price: $<%= @food.price %></h2>
+<h2>Price: $<%= number_with_precision(@food.price, :precision => 2) %></h2>
 <table>
 	<tr>
 		<td><h3>Ingredients</h3></td>
