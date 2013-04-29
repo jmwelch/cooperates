@@ -17,7 +17,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    
+		@food = @user.foods
+    @ingredients = @user.ingredients.select(:ingredient_name).uniq.sort_by{|u| u.ingredient_name}
   end
 
   def new
