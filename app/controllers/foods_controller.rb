@@ -29,4 +29,25 @@ class FoodsController < ApplicationController
 			render 'new'
 		end
 	end
+
+  def edit
+    @food = Food.find(params[:id])
+  end
+
+  def update
+    @food = Food.find(params[:id])
+
+		if @food.update_attributes(params[:food])
+			redirect_to @food
+		else
+			render "edit"
+		end
+	end
+
+  def destroy
+    @food = Food.find(params[:id])
+    @food.destroy
+
+		redirect_to foods_show_url(:id => current_user.id)
+  end
 end
