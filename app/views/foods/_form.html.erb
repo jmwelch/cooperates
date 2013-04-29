@@ -19,7 +19,21 @@
     <%= f.label :price %><br />
     <%= f.number_field :price %>
   </div>
-  <div class="actions">
+	<div>
+		<%= f.fields_for :ingredients do |builder| %>
+			<table>
+				<tr>
+					<td><%= builder.label "Ingredient Used:" %></td>
+					<td><%= builder.label "Quantity Used:" %></td>
+				</tr>
+				<tr>
+					<td><%= builder.text_field :ingredient_name %></td>
+					<td><%= builder.text_field :quantity_used %></td>
+				</tr>
+			</table>
+		<% end %>
+	</div>
+	<div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
