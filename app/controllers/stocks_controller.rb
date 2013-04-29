@@ -23,4 +23,8 @@ class StocksController < ApplicationController
 			render 'new'
 		end
 	end
+
+	def csv
+
+	end
 end
