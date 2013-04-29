@@ -3,13 +3,18 @@
 
 <% if @food.empty? %>
 	<p>No Foods found!</p>
-	<p><%= link_to "Add food?", new_food_path %></p>
 <% else %>
-	<% @food.each do |food| %>
-		<%= food.name %>
-		<%= food.price %><br>
-	<% end %>
-	<br>
-	<p><%= link_to "Add food?", new_food_path %></p>
+	<table>
+		<tr>
+			<td><strong>Food</strong></td>
+			<td><strong>Price</strong></td>
+		</tr>
+		<% @food.each do |food| %>
+			<tr>
+				<td><%= link_to food.name, food_path(food.id) %></td>
+				<td>$<%= food.price %></td>
+			<tr>
+		<% end %><br>
+	</table>
 <% end %>
-
+<p><%= link_to "Add food?", new_food_path %></p>
