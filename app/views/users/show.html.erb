@@ -1,6 +1,7 @@
 <div class="container">
 <br><br>
-<div id="graph"><h2><%= @user.user_type.capitalize %> Data</h2></div>
+<div id="graph"><h2>
+<%= @user.username %> Data</h2></div>
 <style>
   path {
       stroke: steelblue;
@@ -115,7 +116,7 @@ var line = d3.svg.line()
 </script>
 <div class="row">
   <div class="span7">
-    <h1><%= best_in_place @user, :username %>'s page</h1>
+    <h1><%= best_in_place @user, :username %> page</h1>
     <ul>
     	<h3>Username:</h3>
     	<%= @user.username %>

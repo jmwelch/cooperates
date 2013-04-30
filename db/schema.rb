@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130423155213) do
     t.integer "quantity_used"
   end
 
-  create_table "stocks", :force => true do |t|
+  create_table "stock", :force => true do |t|
     t.string  "ingredient_name"
     t.integer "quantity"
     t.integer "user_id"
