@@ -15,13 +15,13 @@ end
 #gem "sqlite3", group: :sqlite3
 #gem "pg", group: :postgres
 
-# gem 'therubyracer'
 gem 'seed-fu', '~> 2.2.0'
 gem 'devise'
 gem 'best_in_place'
 gem 'ransack'
 gem 'slickgrid-rails'
 gem 'seed-fu', '~> 2.2.0'
+gem "nested_form", :git => "git://github.com/ryanb/nested_form.git"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -29,7 +29,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-   #gem 'therubyracer', :platforms => :ruby
+  gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end

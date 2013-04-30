@@ -11,7 +11,7 @@ class FoodsController < ApplicationController
 
 	def new
 		@food = Food.new
-		2.times { @food.ingredients.build }
+		@food.ingredients.build
 		@ings = Ingredient.select(:ingredient_name).uniq
 	end
 
