@@ -1,3 +1,4 @@
+<div class='container'>
 </br></br></br></br>
 <%= form_tag users_search_path, method: :get do %>
   <p>
@@ -7,5 +8,6 @@
 <% end %>
 
 <% @users.each do |user| %>
-<%= user.email %></br>
-<%end%>
+	<%= user.email %></br>
+<% end %>
+</div>
