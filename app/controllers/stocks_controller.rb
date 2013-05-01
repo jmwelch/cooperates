@@ -10,6 +10,12 @@ class StocksController < ApplicationController
 	end
 
 	def new
+		@user = User.find(params[:id])
+
+		if current_user.id != params[:id].to_i
+			redirect_to user_path(@user), :notice => "You cannot edit #{@user.username}'s inventory!"
+		end
+
 		@stock = Stock.new
 	end
 
