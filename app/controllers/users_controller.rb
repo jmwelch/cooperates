@@ -8,12 +8,9 @@ class UsersController < ApplicationController
   end
 
   def search
-    @search =User.search(params[:q])
-    @users = @search.result
+    @users = User.search(params)
 
- # @search.build_condition if @search.conditions.empty?
- # @search.build_sort if @search.sorts.empty?
-  end    
+  end
 
   def show
     @user = User.find(params[:id])

@@ -1,0 +1,29 @@
+search
+--select restaurant/supplier/both from a drop down list
+--filter by rating, and location, restaurant/supplier/both
+
+--restaurants can search for 
+	1) restaurants by typing in 
+		a) user attr => to find restaurants that have queried attributes
+		b) supplier names => to find other restaurants that use the same supplier
+		c) ingredients => to find other restaurants that use the same ingredients 
+	2) suppliers by typing in 
+		a)ingredients => to find suppliers that sell these ingredients
+--suppliers can search for
+	1) restaurants by typing in
+		a) user attr => to find restaurants that have queried attributes
+		b) ingredients => to find restaurants that use these ingredients that the supplier may or may not already sell to
+
+advanced search	
+	filter by: rating
+			   location
+			   user_type
+
+		for restaurants:
+			search for | restaurants/suppliers | -that carry- |  |
+
+	a)another restaurant
+		--regular output
+	b)a supplier
+		--
+	c)--special--ingredient

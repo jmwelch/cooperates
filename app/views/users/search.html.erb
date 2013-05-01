@@ -1,0 +1,11 @@
+</br></br></br></br>
+<%= form_tag users_search_path, method: :get do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", email: nil %>
+  </p>
+<% end %>
+
+<% @users.each do |user| %>
+<%= user.email %></br>
+<%end%>
