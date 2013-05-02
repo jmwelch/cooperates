@@ -30,7 +30,8 @@ class StocksController < ApplicationController
 		end
 	end
 
-	def csv
-
-	end
+	def import
+   	 	Stock.import(params[:file])
+   	 	redirect_to root_url, notice: "Products imported"
+  	end
 end
