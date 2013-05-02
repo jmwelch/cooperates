@@ -19,6 +19,10 @@
     <%= f.label "Quantity in Stock" %><br />
     <%= f.number_field :quantity %>
   </div>
+  <div class="field">
+    <%= f.label "Threshold for Buying More Product" %><br />
+    <%= f.number_field :low_quantity %>
+  </div>
 	<div class="actions">
     <%= f.submit %>
   </div>
