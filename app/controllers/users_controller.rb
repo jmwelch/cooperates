@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @food = @user.foods
     @ingredients = @user.ingredients.select(:ingredient_name).uniq.sort_by{|u| u.ingredient_name}
+
     @a=[]
     @b=[]
     @restOfIngred = @allingredients - @user.ingredients
@@ -38,6 +39,14 @@ class UsersController < ApplicationController
       end
     end
     @c =@b.uniq
+
+
+		@low_stock = []
+		Stock.all.each do |s|
+			if s.low_quantity > s.quantity
+				@low_stock.push(s)
+			end
+		end
 
   end
 

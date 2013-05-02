@@ -21,6 +21,8 @@ gem 'best_in_place'
 gem 'ransack'
 gem 'slickgrid-rails'
 gem 'geocoder'
+gem 'tire'
+gem 'roo'
 gem "nested_form", :git => "git://github.com/ryanb/nested_form.git"
 # Gems used only for assets and not required
 # in production environments by default.
