@@ -3,14 +3,16 @@
 <div id="graph"><h2>
 <%= @user.username %> Data</h2></div>
 
-<h3>Items Low on Stock</h3>
-<% if @low_stock.empty? %>
-	Inventory at adequate levels!
-<% end %>
+<% if current_user.id == @user.id %>
+	<h3>Items Low on Stock</h3>
+	<% if @low_stock.empty? %>
+		Inventory at adequate levels!
+	<% end %>
 
-<% @low_stock.each do |s| %>
-	<%= s.ingredient_name %> has
-	<%= s.quantity %> remaining<br>
+	<% @low_stock.each do |s| %>
+		<%= s.ingredient_name %> has
+		<%= s.quantity %> remaining<br>
+	<% end %>
 <% end %>
 
 <div class="row">
