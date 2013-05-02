@@ -1,11 +1,21 @@
-</br></br></br></br>
-<%= form_tag users_search_path, method: :get do %>
-  <p>
-    <%= text_field_tag :query, params[:query] %>
-    <%= submit_tag "Search", email: nil %>
-  </p>
+<div class="container">
+<br><br>
+
+
+<%= search_form_for @search, url: users_search_path, associations: [:foods] do |f| %>
+  <div class="field">
+    <%=f.label :rating_gteq, "Rating of "%>
+    <%=f.text_field :rating_gteq%>
+    or higher
+  </br>
+    <%= f.label :username_or_email_or_description_or_foods_name_cont, "Lookup:" %>
+    <%= f.text_field :username_or_email_or_description_or_foods_name_cont %>
+  </div>
+  <div class="actions"><%= f.submit "Search" %></div>
 <% end %>
 
 <% @users.each do |user| %>
-<%= user.email %></br>
+<%= user.username%><%= user.rating%></br>
+
 <%end%>
+</div>

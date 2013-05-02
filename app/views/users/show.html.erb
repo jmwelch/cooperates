@@ -116,6 +116,8 @@ var line = d3.svg.line()
 </script>
 <div class="row">
   <div class="span7">
+
+  	<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}" %>
     <h1><%= best_in_place @user, :username %> page</h1>
     <ul>
     	<h3>Username:</h3>
@@ -164,5 +166,14 @@ var line = d3.svg.line()
 		  </br>
 		</div>
 	<% end %>
-<!-- End of IFP -->
+
+Recommendations
+</br>
+restaurants that share the same ingredients</br>
+
+
+</br></br></br></br></br>
+<% for location in @user.nearbys(10) %>
+  <li><%= link_to @user.address, location %> </li>
+<% end %>  
 </div>

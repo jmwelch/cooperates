@@ -4,18 +4,23 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!#, except: [:index]
 
   def index
-    @users = User.all
+
+
+
   end
 
   def search
-    @users = User.search(params)
-
+    @search = User.search(params[:q])
+    @users = @search.result(:distinct => true)
+    @search.build_condition if @search.conditions.empty?
   end
 
   def show
     @user = User.find(params[:id])
-		@food = @user.foods
+    @food = @user.foods
     @ingredients = @user.ingredients.select(:ingredient_name).uniq.sort_by{|u| u.ingredient_name}
+
+    #@ingred_connect = User.search(:ingredients_ingredient_name_cont => "flour", username_not_cont => current_user.username).result(:distinct => true)
   end
 
   def new
@@ -38,7 +43,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
-      respond_with @user
+    respond_with @user
   end
 
   def destroy
