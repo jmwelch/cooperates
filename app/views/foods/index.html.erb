@@ -17,4 +17,7 @@
 		<% end %><br>
 	</table>
 <% end %>
-<p><%= link_to "Add food?", new_food_path %></p>
+
+<% if current_user.id == params[:id].to_i %>
+	<p><%= link_to "Add food?", new_food_path %></p>
+<% end %>

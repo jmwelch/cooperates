@@ -29,6 +29,9 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+		if current_user.id != params[:id].to_i
+			redirect_to user_path(params[:id]), :notice => "You cannot edit #{@user.username}'s profile!"
+		end
   end
 
   def create

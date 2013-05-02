@@ -10,6 +10,12 @@ class FoodsController < ApplicationController
 	end
 
 	def new
+		@user = User.find(params[:id])
+
+		if current_user.id != params[:id].to_i
+			redirect_to foods_show_path(@user.id), :notice => "You cannot edit #{@user.username}'s food!"
+		end
+
 		@food = Food.new
 		@food.ingredients.build
 		@ings = Ingredient.select(:ingredient_name).uniq
@@ -31,10 +37,22 @@ class FoodsController < ApplicationController
 	end
 
   def edit
+		@user = User.find(params[:id])
+
+		if current_user.id != params[:id].to_i
+			redirect_to foods_show_path(@user.id), :notice => "You cannot edit #{@user.username}'s food!"
+		end
+
     @food = Food.find(params[:id])
   end
 
   def update
+		@user = User.find(params[:id])
+
+		if current_user.id != params[:id].to_i
+			redirect_to foods_show_path(@user.id), :notice => "You cannot edit #{@user.username}'s food!"
+		end
+
     @food = Food.find(params[:id])
 
 		if @food.update_attributes(params[:food])
