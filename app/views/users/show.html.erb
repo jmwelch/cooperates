@@ -143,6 +143,12 @@ var line = d3.svg.line()
     <br>
   </div>
   
+  <%if @user.address != nil%>
+	<% for location in @user.nearbys(10) %>
+  <li><%= link_to @user.address, location %> </li>
+<% end %>
+<%end%>
+</div>
 <!-- Beginning of IFP -->
 	<% if current_user.id == @user.id %>
 		<div class="span5">
@@ -167,13 +173,13 @@ var line = d3.svg.line()
 		</div>
 	<% end %>
 
+<!-- End of IFP -->
 Recommendations
 </br>
 restaurants that share the same ingredients</br>
-
-
+<%@c.each do |user|%>
+<%= user.username%></br>
+<%end%>
+<% @c.inspect%>
 </br></br></br></br></br>
-<% for location in @user.nearbys(10) %>
-  <li><%= link_to @user.address, location %> </li>
-<% end %>  
-</div>
+
