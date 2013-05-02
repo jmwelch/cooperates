@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @food = @user.foods
     @ingredients = @user.ingredients.select(:ingredient_name).uniq.sort_by{|u| u.ingredient_name}
 
-    #@ingred_connect = User.search(:ingredients_ingredient_name_cont => "flour", username_not_cont => current_user.username).result(:distinct => true)
+    @ingred_connect = User.search(:ingredients_ingredient_name_cont => "flour", username_not_cont => current_user.username).result(:distinct => true)
   end
 
   def new
