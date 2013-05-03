@@ -6,11 +6,18 @@ class UsersController < ApplicationController
   end
 
   def search
-    @search = User.search(params[:q])
+    if params[:within].present? && (params[:within].to_i > 0)
+      @search = User.near([current_user.latitude, current_user.longitude], params[:within]).search(params[:q])
+      @test = User.near([current_user.latitude, current_user.longitude], params[:within])
+    else
+      @search = User.search(params[:q])
+      @test = "far"
+    end
     @params = params[:q]
     @users = @search.result(:distinct => true)
     @search.build_condition if @search.conditions.empty?
     @search.build_sort if @search.sorts.empty?
+
   end
 
   def show
@@ -24,7 +31,7 @@ class UsersController < ApplicationController
     @user.ingredients.each do |myingredient|
       @restOfIngred.each do |youringredient|
         if youringredient.ingredient_name == myingredient.ingredient_name
-              @a << youringredient
+          @a << youringredient
         end
       end
     end
@@ -39,27 +46,27 @@ class UsersController < ApplicationController
     @c =@b.uniq
 
 
-		@low_stock = []
-		Stock.all.each do |s|
-			if s.low_quantity > s.quantity
-				@low_stock.push(s)
-			end
-		end
-
+    @low_stock = []
+    Stock.all.each do |s|
+     if s.low_quantity > s.quantity
+      @low_stock.push(s)
+    end
   end
 
-  def new
-    @user = User.new
-  end
+end
 
-  def edit
-    @user = User.find(params[:id])
-    if current_user.id != params[:id].to_i
-     redirect_to user_path(params[:id]), :notice => "You cannot edit #{@user.username}'s profile!"
-   end
+def new
+  @user = User.new
+end
+
+def edit
+  @user = User.find(params[:id])
+  if current_user.id != params[:id].to_i
+   redirect_to user_path(params[:id]), :notice => "You cannot edit #{@user.username}'s profile!"
  end
+end
 
- def create
+def create
   @user = User.new(params[:user])
   if @user.save
     redirect_to @user, notice: "user was successfully created."

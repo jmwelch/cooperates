@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :vars
 def vars
+	@test = ""
   @allusers = User.find(:all)
   @allingredients = Ingredient.find(:all)
   @allfoods = Food.find(:all)

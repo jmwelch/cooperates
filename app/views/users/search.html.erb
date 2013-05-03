@@ -3,6 +3,12 @@
 
 	<%= search_form_for @search, url: users_search_path, method: :post do |f| %>
 	public search
+
+	</br>
+	<%= label_tag :within %>
+    <%= text_field_tag :within, params[:within] %> miles
+	</br>
+	<%@test.inspect%>
 	<%if @params == nil%>
 	<%= f.condition_fields do |c| %>
 	<%= render "condition_fields", f: c %>
@@ -45,8 +51,3 @@
 <%= user.username%></br>
 <%end%>
 <%end%>
-
------</br>
-<%= @params.inspect%>
------
-</div>
