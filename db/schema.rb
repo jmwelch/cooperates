@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130502055348) do
 
-
   create_table "foods", :force => true do |t|
     t.string  "name"
     t.integer "user_id"
