@@ -11,7 +11,6 @@ Cooperates::Application.routes.draw do
   resource :stocks do
     collection { post :import}
   end
-  root to: 'stock#index'
 
 	match 'users/:id/food' => 'foods#index', :as => :foods_show
 	match 'users/:id/ingredients' => 'ingredients#index', :as => :ingredient_show

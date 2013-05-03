@@ -1,7 +1,5 @@
 <div class="container">
-<br><br>
-
-
+<br><br><br><br>
 <%= search_form_for @search, url: users_search_path, associations: [:foods] do |f| %>
   <div class="field">
     <%=f.label :rating_gteq, "Rating of "%>
@@ -11,7 +9,7 @@
     <%= f.label :username_or_email_or_description_or_foods_name_cont, "Lookup:" %>
     <%= f.text_field :username_or_email_or_description_or_foods_name_cont %>
   </div>
-  <div class="actions"><%= f.submit "Search" %></div>
+  <div class="actions"><%= f.submit "Search", :class=>'btn' %></div>
 <% end %>
 
 <% @users.each do |user| %>

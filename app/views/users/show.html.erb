@@ -1,7 +1,6 @@
 <div class="container">
 <br><br>
-<div id="graph"><h2>
-<%= @user.username %> Data</h2></div>
+<h2><%= @user.username.capitalize %>'s Data</h2>
 
 <% if current_user.id == @user.id %>
 	<h3>Items Low on Stock</h3>
@@ -16,10 +15,10 @@
 <% end %>
 
 <div class="row">
-  <div class="span7">
+  <div class="span6"><!--START OF SECTION-->
 
   	<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}" %>
-    <h1><%= best_in_place @user, :username %> page</h1>
+    <h1><%= best_in_place @user, :username %>'s page</h1>
     <ul>
     	<h3>Username:</h3>
     	<%= @user.username %>
@@ -33,8 +32,6 @@
     	<h3>Price Range:</h3>
     	<%= @user.price_range %>
 	
-
-
     </ul> 
 
     <br>
@@ -42,17 +39,16 @@
     	<p><%= link_to 'Edit Profile', edit_user_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
     <% end %>
     <br>
-  </div>
-  
+  </div> <!--END OF SECTION-->
+
+<div class="span6">
   <%if @user.address != nil%>
-	<% for location in @user.nearbys(10) %>
-  <li><%= link_to @user.address, location %> </li>
-<% end %>
-<%end%>
-</div>
+	  <% for location in @user.nearbys(10) %>
+    <li><%= link_to @user.address, location %> </li>
+    <% end %>
+  <%end%>
 <!-- Beginning of IFP -->
 	<% if current_user.id == @user.id %>
-		<div class="span5">
 			<h1>IFP</h1>
 			<h2>Menu</h2>
 			<% @food.each do |f| %>
@@ -67,27 +63,21 @@
 			<br><br>
 
 			<p><%= link_to 'Edit Inventory', stock_show_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
-
-		  </br>
-		  </br>
-		  </br>
-		</div>
+			
+      <h2>Cooperate! Recommendations</h2>
+      </br>
+      Restaurants that share the same ingredients</br>
+      <%@c.each do |user|%>
+      <%= user.username%></br>
+      <%end%>
+      <% @c.inspect%>
+      
+    	<h2>Import Products</h2>
+    		<%= form_tag import_stocks_path, multipart: true do %>
+      		<%= file_field_tag :file %><br>
+      		<%= submit_tag "Import", :class=>'btn' %>
+    	<% end %>
 	<% end %>
-
-	<h2>Import Products</h2>
-		<%= form_tag import_stocks_path, multipart: true do %>
-  		<%= file_field_tag :file %>
-  		<%= submit_tag "Import" %>
-	<% end %>
-
-
-<!-- End of IFP -->
-Recommendations
-</br>
-restaurants that share the same ingredients</br>
-<%@c.each do |user|%>
-<%= user.username%></br>
-<%end%>
-<% @c.inspect%>
-</br></br></br></br></br>
+<!-- End of IFP -->	
+</div>
 
