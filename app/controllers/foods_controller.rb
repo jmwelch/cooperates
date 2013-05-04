@@ -68,4 +68,26 @@ class FoodsController < ApplicationController
 
 		redirect_to foods_show_url(:id => current_user.id)
   end
+
+	def sell
+		@user = User.find(params[:id])
+		@food = Food.find(params[:food_id])
+		@ingredients = @food.ingredients
+		@ingredients.each do |i|
+			q = i.quantity_used
+			s = Stock.where(:ingredient_name => i.ingredient_name).first
+			if (s.quantity - q) < 0
+				redirect_to foods_show_path(@user.id), :notice => "Not enough ingredients to sell #{@food.name}!" and return
+			end
+		end
+
+		@ingredients.each do |i|
+			q = i.quantity_used
+			s = Stock.where(:ingredient_name => i.ingredient_name).first
+			s.quantity = s.quantity - q
+			s.save
+		end
+
+		redirect_to foods_show_path(@user.id), :notice => "You have sold one #{@food.name}!"
+	end
 end

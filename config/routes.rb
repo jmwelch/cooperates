@@ -12,6 +12,7 @@ Cooperates::Application.routes.draw do
     collection { post :import}
   end
 
+	post 'users/:id/food' => 'foods#sell', :as => :food_sell
 	match 'users/:id/food' => 'foods#index', :as => :foods_show
 	match 'users/:id/inventory' => 'stocks#index', :as => :stock_show
 	match 'users/:id/inventory/csv' => 'stocks#csv', :as => :stocks_csv

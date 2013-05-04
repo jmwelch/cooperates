@@ -13,6 +13,7 @@
 			<tr>
 				<td><%= link_to food.name, food_path(food.id) %></td>
 				<td>$<%= number_with_precision(food.price, :precision => 2) %></td>
+				<td><%= link_to "Sell this Food", food_sell_path(current_user.id, :food_id => food.id), :method => 'post' %></td>
 			<tr>
 		<% end %><br>
 	</table>
