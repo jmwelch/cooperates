@@ -22,7 +22,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @food = @user.foods
-    @ingredients = @user.ingredients.select(:ingredient_name).uniq.sort_by{|u| u.ingredient_name}
+    #@ingredients = @user.ingredients.select(:ingredient_name).uniq.sort_by{|u| u.ingredient_name}
+		@ingredients = @user.stocks.select(:ingredient_name).sort_by{|u| u.ingredient_name}
 
     @a=[]
     @b=[]
@@ -54,7 +55,24 @@ class UsersController < ApplicationController
 			end
   	end
 
-		@supplier_needs = 3
+		@clients = []	
+		if @user.user_type == "supplier"
+			already = false
+			User.where(:user_type => "restaurant").each do |rest|
+				already = false
+				rest.stocks.each do |ing|
+					if already == true
+						break
+					end
+					@ingredients.each do |i|
+						if i.ingredient_name == ing.ingredient_name
+							@clients.push(rest)
+							already = true
+						end
+					end
+				end
+			end
+		end #end supplier block
 	end
 
 	def new
