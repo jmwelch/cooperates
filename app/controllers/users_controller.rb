@@ -66,7 +66,7 @@ class UsersController < ApplicationController
 					end
 					@ingredients.each do |i|
 						if i.ingredient_name == ing.ingredient_name
-							@clients.push(rest)
+							@clients.push([rest, i.ingredient_name])
 							already = true
 						end
 					end

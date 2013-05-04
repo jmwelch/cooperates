@@ -141,7 +141,8 @@
 				<% end %>
 
 				<% @clients.each do |c| %>
-					<%= link_to c.username, user_path(c.id) %><br>
+					<%= link_to c[0].username, user_path(c[0].id) %> uses
+					<%= c[1] %><br>
 				<% end %>
 		    </br>
 		    
