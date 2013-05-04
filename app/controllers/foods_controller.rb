@@ -23,6 +23,13 @@ class FoodsController < ApplicationController
 
 	def create
 		@food = Food.new(params[:food])
+			@food.ingredients.each do |i|
+				s = Stock.where(:ingredient_name => i.ingredient_name)
+				if s.empty?
+					flash[:notice] = "#{i.ingredient_name} not found in inventory. Please add it first!"
+					render 'new' and return
+				end
+			end
 		@food.user_id = current_user.id
 
 		@food.ingredients.each do |i|
