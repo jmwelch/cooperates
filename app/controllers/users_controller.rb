@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   respond_to :html, :json
   before_filter :authenticate_user!#, except: [:index]
-  def index
 
+  def index
   end
 
   def search
@@ -17,7 +17,6 @@ class UsersController < ApplicationController
     @users = @search.result(:distinct => true)
     @search.build_condition if @search.conditions.empty?
     @search.build_sort if @search.sorts.empty?
-
   end
 
   def show
@@ -48,47 +47,50 @@ class UsersController < ApplicationController
 
     @low_stock = []
     Stock.all.each do |s|
-     if s.low_quantity > s.quantity
-      @low_stock.push(s)
-    end
-  end
+			if s.user_id == current_user.id
+		  	if s.low_quantity > s.quantity
+		    	@low_stock.push(s)
+		  	end
+			end
+  	end
 
-end
+		@supplier_needs = 3
+	end
 
-def new
-  @user = User.new
-end
+	def new
+		@user = User.new
+	end
 
-def edit
-  @user = User.find(params[:id])
-  if current_user.id != params[:id].to_i
-   redirect_to user_path(params[:id]), :notice => "You cannot edit #{@user.username}'s profile!"
- end
-end
+	def edit
+		@user = User.find(params[:id])
+		if current_user.id != params[:id].to_i
+		 redirect_to user_path(params[:id]), :notice => "You cannot edit #{@user.username}'s profile!"
+	 end
+	end
 
-def create
-  @user = User.new(params[:user])
-  if @user.save
-    redirect_to @user, notice: "user was successfully created."
-  else
-    render "new"
-  end
-end
+	def create
+		@user = User.new(params[:user])
+		if @user.save
+		  redirect_to @user, notice: "user was successfully created."
+		else
+		  render "new"
+		end
+	end
 
-def update
-  @user = User.find(params[:id])
-  @user.update_attributes(params[:user])
-  respond_with @user
-end
+	def update
+		@user = User.find(params[:id])
+		@user.update_attributes(params[:user])
+		respond_with @user
+	end
 
-def destroy
-  @user = user.find(params[:id])
-  @user.destroy
-  redirect_to users_url
-end
+	def destroy
+		@user = user.find(params[:id])
+		@user.destroy
+		redirect_to users_url
+	end
 
-def import
-  User.import(params[:file])
-  redirect_to users_url, notice: "Products imported"
-end
+	def import
+		User.import(params[:file])
+		redirect_to users_url, notice: "Products imported"
+	end
 end
