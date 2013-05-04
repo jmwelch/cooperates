@@ -1,5 +1,9 @@
 <div class="container">
 <br><br>
+<% if flash[:notice] %>
+	<%= link_to "Add Ingredient to Stock", new_stock_path(current_user.id), :notice => 'TEst' %>
+<% end %>
+
 <h1>New Food</h1>
 
 <%= render 'form' %>

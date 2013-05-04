@@ -12,14 +12,13 @@ Cooperates::Application.routes.draw do
     collection { post :import}
   end
 
+	post 'users/:id/food' => 'foods#sell', :as => :food_sell
 	match 'users/:id/food' => 'foods#index', :as => :foods_show
-	match 'users/:id/ingredients' => 'ingredients#index', :as => :ingredient_show
 	match 'users/:id/inventory' => 'stocks#index', :as => :stock_show
 	match 'users/:id/inventory/csv' => 'stocks#csv', :as => :stocks_csv
 
   resources :users
   resources :foods
-  resources :ingredients
 	resources :stocks
 
   # The priority is based upon order of creation:
@@ -30,7 +29,6 @@ Cooperates::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
 	match 'users/search' => 'users#search'
 	match 'users/:id/food/new' => 'foods#new', :as => 'new_food'
-	match 'users/:id/ingredient/new' => 'ingredients#new', :as => 'new_ingredient'
 	match 'users/:id/inventory/new' => 'stocks#new', :as => 'new_stock'
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
