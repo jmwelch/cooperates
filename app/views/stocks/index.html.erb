@@ -5,7 +5,10 @@
 	<p>Inventory appears to be empty!</p>
 <% else %>
 	<% @stock.each do |s| %>
-		<%= link_to s.ingredient_name, stock_path(s) %><br>
+		<%= link_to s.ingredient_name, stock_path(s) %>
+		<% if s.quantity < s.low_quantity %>
+			<%= p " - This item is low on stock!" %>
+		<% end %><br>
 	<% end %>
 <% end %>
 <br>
