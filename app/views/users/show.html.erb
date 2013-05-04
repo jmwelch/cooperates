@@ -87,17 +87,6 @@
 <!-- End of Restaurant Profile -->
 <!-- Start of Supplier Profile -->
 
-	<% if current_user.id == @user.id %>
-		<h3>Restaurants Using Ingredients You Supply</h3>
-		<% if @clients.empty? %>
-			You should increase your inventory!
-		<% end %>
-
-		<% @clients.each do |c| %>
-			<%= link_to c.username, user_path(c.id) %><br>
-		<% end %>
-	<% end %>
-
 	<div class="row">
 		<div class="span6"><!--START OF SECTION-->
 
@@ -136,12 +125,7 @@
 	<!-- Beginning of IFP -->
 		<% if current_user.id == @user.id %>
 				<h1>IFP</h1>
-				<h2>Menu</h2>
-				<% @food.each do |f| %>
-					<%= link_to f.name, food_path(f) %>
-					$<%= number_with_precision(f.price, :precision => 2) %><br>
-				<% end %>
-				<h2>Ingredients Used</h2>
+				<h2>Ingredients Provided</h2>
 				<% @ingredients.each do |i| %>
 					<%= i.ingredient_name %><br>
 				<% end %>
@@ -151,12 +135,15 @@
 				<p><%= link_to 'Edit Inventory', stock_show_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
 			
 		    <h2>Cooperate! Recommendations</h2>
+				<h3>Restaurants Using Ingredients You Supply</h3>
+				<% if @clients.empty? %>
+					You should increase your inventory!
+				<% end %>
+
+				<% @clients.each do |c| %>
+					<%= link_to c.username, user_path(c.id) %><br>
+				<% end %>
 		    </br>
-		    Restaurants that share the same ingredients</br>
-		    <%@c.each do |user|%>
-		    <%= user.username%></br>
-		    <%end%>
-		    <% @c.inspect%>
 		    
 		  	<!--<h2>Import Products</h2>
 		  		<%= form_tag import_stocks_path, multipart: true do %>

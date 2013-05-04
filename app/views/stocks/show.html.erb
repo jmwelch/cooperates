@@ -1,6 +1,10 @@
 <div class='container'>
 <br><br><br>
 
-<%= @stock.ingredient_name %><br>
+<%= @stock.ingredient_name %> has
+<%= @stock.quantity %> left
+<% if @stock.quantity < @stock.low_quantity %>
+	This ingredient is low on stock!
+<% end %><br>
 <%= link_to "View Inventory", stock_show_path(:id => current_user.id) %>
 </div>

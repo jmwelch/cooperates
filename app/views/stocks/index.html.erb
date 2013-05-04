@@ -5,7 +5,7 @@
 	<p>Inventory appears to be empty!</p>
 <% else %>
 	<% @stock.each do |s| %>
-		<%= s.ingredient_name %>
+		<%= link_to s.ingredient_name, stock_path(s) %><br>
 	<% end %>
 <% end %>
 <br>
