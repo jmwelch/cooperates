@@ -11,9 +11,17 @@
     </div>
   <% end %>
 
+	<% if !params[:food].nil? %>
+		<% val = params[:food] %>
+	<% elsif !params[:transaction].nil? %>
+		<% val = params[:transaction][:ingredient_name] %>
+	<% else %>
+		<% val = '' %>
+	<% end %>
+
   <div class="field">
     <%= f.label "Ingredient to be Bought" %><br />
-    <%= f.text_field :ingredient_name, :value => params[:food] %>
+    <%= f.text_field :ingredient_name, :value => val %>
   </div>
   <div class="field">
     <%= f.label :quantity %><br />

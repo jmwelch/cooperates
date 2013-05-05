@@ -2,7 +2,7 @@ class Stock < ActiveRecord::Base
 
 	belongs_to :user
 
-	attr_accessible :ingredient_name, :quantity, :low_quantity
+	attr_accessible :ingredient_name, :quantity, :low_quantity, :user_id
 
 	def self.import(file)
     CSV.foreach(file.path, head:true) do |row|

@@ -27,10 +27,47 @@ class TransactionsController < ApplicationController
 
 	def create
 		@transaction = Transaction.new(params[:transaction])
+		u = User.where(:username => params[:transaction][:bought_from])
+		# If the supplier is not found, redirect
+		if u.empty?
+			flash[:notice] = "Supplier #{params[:transaction][:bought_from]} not found!"
+			render 'new', :food => params[:transaction][:ingredient_name] and return
+		end
+
+		# Make sure the supplier has that ingredient
+		u = u.first
+		ings = u.stocks
+		has_it = false
+		ings.each do |i|
+			if i.ingredient_name == @transaction.ingredient_name
+				has_it = true and break
+			end
+		end
+		if has_it == false
+			flash[:notice] = "Supplier #{params[:transaction][:bought_from]} does not have #{@transaction.ingredient_name}!"
+			render 'new', :food => params[:transaction][:ingredient_name] and return
+		end
+
+		# Make sure the supplier has enough of that ingredient
+		ing = ings.where(:ingredient_name => @transaction.ingredient_name).first
+		if ing.quantity < @transaction.quantity
+			flash[:notice] = "Supplier #{params[:transaction][:bought_from]} does not have sufficient supplies!"
+			render 'new', :food => params[:transaction][:ingredient_name] and return
+		end
+
+		# If the ingredient purchased is not already listed in Stock, add it
+		stock = Stock.where(:ingredient_name => params[:transaction][:ingredient_name])
+		if stock.empty?
+			stock = Stock.create(:ingredient_name => params[:transaction][:ingredient_name], :quantity => 0, :user_id => current_user.id, :low_quantity => 0)
+			flash[:notice] = "Please don't forget to update ingredient #{stock.ingredient_name} with its information"
+		end
+
 		@transaction.purchase_date = Time.now
 		@transaction.sold_to = current_user.id
-		u = User.where(:username => params[:transaction][:bought_from])
 		@transaction.bought_from = u.first.id
+
+		# Update relevant Stock levels
+		
 
 		if @transaction.save
 			redirect_to @transaction
