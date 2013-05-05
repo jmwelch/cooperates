@@ -53,9 +53,9 @@
 		<%if !@user.address.nil? %>
 		  <h2>Places Near You</h2>
 			<% for location in @near= @user.nearbys(10) %>
+				<% end %>
   			  <% @near.each do |user| %>
   			    <li><%= link_to user.username, user_path(user.id) %> </li>
-  			  <% end %>
 		    <%end%>
 		<% end %>
 		
