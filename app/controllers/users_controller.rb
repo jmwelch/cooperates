@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     @recommended_user=[]
 
 # where is @allingredients coming from?//application_controller.rb
-    @restOfIngred = @allingredients - @user.ingredients
+    @restOfIngred = Ingredient.all - @user.ingredients
     @user.ingredients.each do |myingredient|
     	@restOfIngred.each do |youringredient|
     		if youringredient.ingredient_name == myingredient.ingredient_name
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     end
     
     @common_ingred.each do |restaurant|
-    	@allusers.each do |user|
+    	User.all.each do |user|
     		if restaurant.user_id == user.id
     			@recommended_user << user
     		end
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 #########################
     @common_stock=[]
     @recommended_user=[]
-    @restOfStock = @allstocks - @user.stocks
+    @restOfStock = Stock.all - @user.stocks
     @user.stocks.each do |mystocks|
       @restOfStock.each do |yourstock|
         if yourstock.ingredient_name == mystocks.ingredient_name
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
     end
 
     @common_stock.each do |supplier|
-      @allusers.each do |user|
+      User.all.each do |user|
         if supplier.user_id == user.id && user.user_type != 'restaurant'
           @recommended_user << user
         end
