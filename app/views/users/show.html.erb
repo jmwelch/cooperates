@@ -8,14 +8,15 @@
     <hr>
     <% if @user.user_type == "restaurant" %>
     	<% if current_user.id == @user.id %>
-    		<strong>Status of Items in Stock:</strong>
+    		<strong>Status of Items in Stock:</strong><br>
     		<% if @low_stock.empty? %>
     			Inventory is empty!
     		<% end %>
 
     		<% @low_stock.each do |s| %>
     			<%= s.ingredient_name %> has
-    			<%= s.quantity %> remaining<br>
+    			<%= s.quantity %> remaining
+					<%= link_to "Buy more", new_transaction_path(:id => current_user.id, :food => s.ingredient_name) %><br>
     		<% end %>
     	<% end %>
     
