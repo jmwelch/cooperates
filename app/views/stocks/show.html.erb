@@ -1,13 +1,20 @@
 <div class='container'>
-<br><br><br>
+	<br><br><br>
 
-<%= @stock.ingredient_name %> has
-<%= @stock.quantity %> left
-<% if @stock.quantity < @stock.low_quantity %>
-	- This ingredient is low on stock!
-	<%= link_to "Buy more?", new_transaction_path(:id => current_user.id, :food => @stock.ingredient_name) %>
-<% end %><br>
-<br>
-<%= link_to "Edit this Ingredient", edit_stock_path(@stock) %><br>
-<%= link_to "View Inventory", stock_show_path(:id => current_user.id) %>
+	<%= @stock.ingredient_name %> has
+	<%= @stock.quantity %> left
+	<% if @stock.quantity < @stock.low_quantity %>
+		- This ingredient is low on stock!
+		<%= link_to "Buy more?", new_transaction_path(:id => current_user.id, :food => @stock.ingredient_name) %>
+	<% end %><br><br>
+
+	Last transaction:<br>
+	<% if !@last_trans.nil? %>
+		Bought <%= @last_trans.quantity %> from <%= @supplier.username %> on <%= @last_trans.purchase_date.strftime "%B %d, %Y" %>
+	<% else %>
+		No transaction history!
+	<% end %>
+	<br><br>
+	<%= link_to "Edit this Ingredient", edit_stock_path(@stock) %><br>
+	<%= link_to "View Inventory", stock_show_path(:id => current_user.id) %>
 </div>

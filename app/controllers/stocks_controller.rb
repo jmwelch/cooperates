@@ -16,6 +16,11 @@ class StocksController < ApplicationController
 		if current_user.id != @user.id
 			redirect_to user_path(@user), :notice => "You cannot view #{@user.username}'s inventory!"
 		end
+
+		@last_trans = Transaction.where(:ingredient_name => @stock.ingredient_name, :sold_to => current_user.id).first
+		if !@last_trans.nil?
+			@supplier = User.find(@last_trans.bought_from)
+		end
 	end
 
 	def new
