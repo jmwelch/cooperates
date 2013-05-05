@@ -35,14 +35,20 @@ class TransactionsController < ApplicationController
 		end
 
 		u = User.where(:username => params[:transaction][:bought_from])
-		# If the supplier is not found, redirect
+		# If the user is not found, redirect
 		if u.empty?
-			flash[:notice] = "Supplier #{params[:transaction][:bought_from]} not found!"
+			flash[:notice] = "User #{params[:transaction][:bought_from]} not found!"
+			render 'new', :food => params[:transaction][:ingredient_name] and return
+		end
+
+		u = u.first
+		# Make sure the user is a supplier
+		if u.user_type != 'supplier'
+			flash[:notice] = "User #{u.username} is not a supplier!"
 			render 'new', :food => params[:transaction][:ingredient_name] and return
 		end
 
 		# Make sure the supplier has that ingredient
-		u = u.first
 		ings = u.stocks
 		has_it = false
 		ings.each do |i|
