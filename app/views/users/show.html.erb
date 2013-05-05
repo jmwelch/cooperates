@@ -64,7 +64,7 @@
 					<%= link_to f.name, food_path(f) %>
 					$<%= number_with_precision(f.price, :precision => 2) %><br>
 				<% end %>
-				<%= link_to 'Edit Menu', 'food', :class=>"h3" %><br>
+				<%= link_to 'Edit Menu', food_sell_path, :class=>"h3" %><br>
         
 				<h2>Ingredients Used</h2>
 				<% @ingredients.each do |i| %>
