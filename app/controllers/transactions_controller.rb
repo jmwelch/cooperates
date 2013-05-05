@@ -71,7 +71,7 @@ class TransactionsController < ApplicationController
 		stock.quantity = stock.quantity - @transaction.quantity
 		stock.save
 		stock = Stock.where(:ingredient_name => params[:transaction][:ingredient_name], :user_id => @transaction.sold_to).first
-		stock.quantity = stock.quantity - @transaction.quantity
+		stock.quantity = stock.quantity + @transaction.quantity
 		stock.save
 
 		if @transaction.save
