@@ -13,6 +13,7 @@ Cooperates::Application.routes.draw do
   end
 
 	post 'users/:id/food' => 'foods#sell', :as => :food_sell
+	post 'users/:id/inventory' => 'stocks#restock', :as => :stock_show
 	match 'users/:id/food' => 'foods#index', :as => :foods_show
 	match 'users/:id/inventory' => 'stocks#index', :as => :stock_show
 	match 'users/:id/inventory/csv' => 'stocks#csv', :as => :stocks_csv

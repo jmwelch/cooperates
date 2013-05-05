@@ -64,6 +64,17 @@ class StocksController < ApplicationController
 		end
 	end
 
+	def restock
+		@user = User.find(params[:id])
+		@stock = @user.stocks
+		stock = Stock.where(:ingredient_name => params[:ingredient], :user_id => @user.id).first
+		stock.quantity = stock.quantity + 10
+		stock.save
+
+		flash[:notice] = "#{stock.ingredient_name} increased by 10!"
+		render 'index'
+	end
+
 	def import
    	 	Stock.import(params[:file])
    	 	redirect_to root_url, notice: "Products imported"
