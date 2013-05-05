@@ -6,5 +6,7 @@
 <% if @stock.quantity < @stock.low_quantity %>
 	- This ingredient is low on stock!
 <% end %><br>
+<br>
+<%= link_to "Edit this Ingredient", edit_stock_path(@stock) %><br>
 <%= link_to "View Inventory", stock_show_path(:id => current_user.id) %>
 </div>
