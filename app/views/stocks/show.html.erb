@@ -5,6 +5,7 @@
 <%= @stock.quantity %> left
 <% if @stock.quantity < @stock.low_quantity %>
 	- This ingredient is low on stock!
+	<%= link_to "Buy more?", new_transaction_path(:id => current_user.id, :food => @stock.ingredient_name) %>
 <% end %><br>
 <br>
 <%= link_to "Edit this Ingredient", edit_stock_path(@stock) %><br>
