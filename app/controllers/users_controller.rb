@@ -25,48 +25,47 @@ class UsersController < ApplicationController
     #@ingredients = @user.ingredients.select(:ingredient_name).uniq.sort_by{|u| u.ingredient_name}
     @ingredients = @user.stocks.sort_by{|u| u.ingredient_name}
 ####################
-    @a=[]
-    @b=[]
-# can you please rename these variables to something helpful?
+    @common_ingred=[]
+    @recommended_user=[]
 
-# where is @allingredients coming from?
+# where is @allingredients coming from?//application_controller.rb
     @restOfIngred = @allingredients - @user.ingredients
     @user.ingredients.each do |myingredient|
     	@restOfIngred.each do |youringredient|
     		if youringredient.ingredient_name == myingredient.ingredient_name
-    			@a << youringredient
+    			@common_ingred << youringredient
     		end
     	end
     end
     
-    @a.each do |restaurant|
+    @common_ingred.each do |restaurant|
     	@allusers.each do |user|
     		if restaurant.user_id == user.id
-    			@b << user
+    			@recommended_user << user
     		end
     	end
     end
-    @c = @b.uniq
+    @final_comm_ingred_list = @recommended_user.uniq
 #########################
-    @d=[]
-    @e=[]
+    @common_stock=[]
+    @recommended_user=[]
     @restOfStock = @allstocks - @user.stocks
     @user.stocks.each do |mystocks|
       @restOfStock.each do |yourstock|
         if yourstock.ingredient_name == mystocks.ingredient_name
-          @d << yourstock
+          @common_stock << yourstock
         end
       end
     end
 
-    @d.each do |supplier|
+    @common_stock.each do |supplier|
       @allusers.each do |user|
         if supplier.user_id == user.id && user.user_type != 'restaurant'
-          @e << user
+          @recommended_user << user
         end
       end
     end
-    @f = @e.uniq
+    @final_comm_supp_list = @recommended_user.uniq
 ############################
     @low_stock = []
     Stock.all.each do |s|
