@@ -72,12 +72,17 @@
 				
 				<br><br>
 			
-		    <h2>Optimal Cooperates! Matches</h2>
+		    <h2>Optimal Cooperates! Restaurant Matches</h2>
 		    <%@c.each do |user|%>
 		    <%= user.username%></br>
 		    <%end%>
 		    <% @c.inspect%>
 		    
+		    <h2>Optimal Cooperates! Supplier Matches</h2>
+		    <%@f.each do |user|%>
+		    <%= user.username%></br>
+		    <%end%>
+		    <% @f.inspect%>
 		  	<!--<h2>Import Products</h2>
 		  		<%= form_tag import_stocks_path, multipart: true do %>
 		    		<%= file_field_tag :file %><br>
@@ -154,11 +159,9 @@
 		    		<%= submit_tag "Import", :class=>'btn' %>
 		  	<% end %>-->
 		<% end %>
+
 	<!-- End of IFP -->	
-
-
 
 <% end %>
 <!-- End of Supplier Profile -->
 </div>
-

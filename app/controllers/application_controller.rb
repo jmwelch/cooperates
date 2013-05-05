@@ -7,5 +7,6 @@ def vars
   @allusers = User.find(:all)
   @allingredients = Ingredient.find(:all)
   @allfoods = Food.find(:all)
+  @allstocks = Stock.find(:all)
 end
 end
