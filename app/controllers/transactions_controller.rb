@@ -56,7 +56,7 @@ class TransactionsController < ApplicationController
 		end
 
 		# If the ingredient purchased is not already listed in Stock, add it
-		stock = Stock.where(:ingredient_name => params[:transaction][:ingredient_name])
+		stock = Stock.where(:ingredient_name => params[:transaction][:ingredient_name], :user_id => current_user.id)
 		if stock.empty?
 			stock = Stock.create(:ingredient_name => params[:transaction][:ingredient_name], :quantity => 0, :user_id => current_user.id, :low_quantity => 0)
 			flash[:notice] = "Please don't forget to update ingredient #{stock.ingredient_name} with its information"
@@ -64,10 +64,15 @@ class TransactionsController < ApplicationController
 
 		@transaction.purchase_date = Time.now
 		@transaction.sold_to = current_user.id
-		@transaction.bought_from = u.first.id
+		@transaction.bought_from = u.id
 
 		# Update relevant Stock levels
-		
+		stock = Stock.where(:ingredient_name => params[:transaction][:ingredient_name], :user_id => @transaction.bought_from).first
+		stock.quantity = stock.quantity - @transaction.quantity
+		stock.save
+		stock = Stock.where(:ingredient_name => params[:transaction][:ingredient_name], :user_id => @transaction.sold_to).first
+		stock.quantity = stock.quantity - @transaction.quantity
+		stock.save
 
 		if @transaction.save
 			redirect_to @transaction
