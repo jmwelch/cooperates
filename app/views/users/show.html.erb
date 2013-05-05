@@ -49,10 +49,12 @@
 		<h1>Inward Facing Profile</h1>
     <hr>
 	  <h2>Places Near You</h2>
-		<%if @user.address != nil%>
-			<% for location in @user.nearbys(10) %>
-		  <li><%= link_to @user.address, location %> </li>
-		  <% end %>
+		<%if !@user.address.nil? %>
+			<% for location in @near= @user.nearbys(10) %>
+			<% end %>
+			<% @near.each do |user| %>
+			<li><%= link_to user.username, user_path(user.id) %> </li>
+			<% end %>
 		<%end%>
 		
 	<!-- Beginning of IFP -->
@@ -74,13 +76,13 @@
 			
 		    <h2>Optimal Cooperates! Restaurant Matches</h2>
 		    <%@c.each do |user|%>
-		    <%= user.username%></br>
+		    <%= link_to user.username, user_path(user.id)%></br>
 		    <%end%>
 		    <% @c.inspect%>
 		    
 		    <h2>Optimal Cooperates! Supplier Matches</h2>
 		    <%@f.each do |user|%>
-		    <%= user.username%></br>
+		    <%= link_to user.username, user_path(user.id)%></br>
 		    <%end%>
 		    <% @f.inspect%>
 		  	<!--<h2>Import Products</h2>
@@ -124,10 +126,13 @@
 		</div> <!--END OF SECTION-->
 
 	<div class="span6">
-		<%if @user.address != nil%>
-			<% for location in @user.nearbys(10) %>
-		  <li><%= link_to @user.address, location %> </li>
-		  <% end %>
+		  <h2>Places Near You</h2>
+		<%if !@user.address.nil? %>
+			<% for location in @near= @user.nearbys(10) %>
+			<% end %>
+			<% @near.each do |user| %>
+			<li><%= link_to user.username, user_path(user.id) %> </li>
+			<% end %>
 		<%end%>
 	<!-- Beginning of IFP -->
 		<% if current_user.id == @user.id %>
@@ -140,7 +145,7 @@
 				<br><br>
 
 				<p><%= link_to 'Edit Inventory', stock_show_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
-			
+
 		    <h2>Cooperate! Recommendations</h2>
 				<h3>Restaurants Using Ingredients You Supply</h3>
 				<% if @clients.empty? %>
@@ -152,7 +157,7 @@
 					<%= c[1] %><br>
 				<% end %>
 		    </br>
-		    
+
 		  	<!--<h2>Import Products</h2>
 		  		<%= form_tag import_stocks_path, multipart: true do %>
 		    		<%= file_field_tag :file %><br>

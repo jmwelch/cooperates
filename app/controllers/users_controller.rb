@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   	@food = @user.foods
     #@ingredients = @user.ingredients.select(:ingredient_name).uniq.sort_by{|u| u.ingredient_name}
     @ingredients = @user.stocks.select(:ingredient_name).sort_by{|u| u.ingredient_name}
-
+####################
     @a=[]
     @b=[]
     @restOfIngred = @allingredients - @user.ingredients
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     	end
     end
     @c = @b.uniq
-
+#########################
     @d=[]
     @e=[]
     @restOfStock = @allstocks - @user.stocks
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
       end
     end
     @f = @e.uniq
-
+############################
     @low_stock = []
     Stock.all.each do |s|
     	if s.user_id == current_user.id
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
     		end
     	end
     end
-
+#############################
     @clients = []	
     if @user.user_type == "supplier"
     	already = false
@@ -93,7 +93,16 @@ class UsersController < ApplicationController
     	end
 		end #end supplier block
 	end
+############################
 
+@client_list = []
+  
+
+############################
+
+
+
+############################
 	def new
 		@user = User.new
 	end

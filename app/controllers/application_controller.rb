@@ -8,5 +8,6 @@ def vars
   @allingredients = Ingredient.find(:all)
   @allfoods = Food.find(:all)
   @allstocks = Stock.find(:all)
+  @alltransactions = Transaction.find(:all)
 end
 end
