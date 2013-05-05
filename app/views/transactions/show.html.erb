@@ -1,0 +1,10 @@
+<div class='container'>
+<br><br><br>
+
+<%= @transaction.quantity %> of <%= @transaction.ingredient_name %> bought from <%= link_to @supplier.username, user_path(@supplier.id) %> on <%= @transaction.purchase_date.strftime "%B %d, %Y" %><br>
+
+<br>
+
+<%= link_to 'See all Transactions', transactions_show_path(current_user.id) %>
+
+</div>

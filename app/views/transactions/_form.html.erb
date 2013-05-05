@@ -1,0 +1,29 @@
+<%= form_for(@transaction) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Ingredient to be Bought" %><br />
+    <%= f.text_field :ingredient_name, :value => params[:food] %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br />
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :supplier %><br />
+    <%= f.number_field :bought_from %>
+  </div>
+	<div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

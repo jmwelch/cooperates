@@ -8,6 +8,7 @@
 		<%= link_to s.ingredient_name, stock_path(s) %>
 		<% if s.quantity < s.low_quantity %>
 			<%= p " - This item is low on stock!" %>
+			<%= link_to "Buy more?", new_transaction_path(current_user.id, :food => s.ingredient_name) %>
 		<% end %><br>
 	<% end %>
 <% end %>

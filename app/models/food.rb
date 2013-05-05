@@ -10,7 +10,7 @@ class Food < ActiveRecord::Base
 
 	UNRANSACKABLE_ATTRIBUTES = ["id", "user_id", "ingredient_name"]
 
-def self.ransackable_attributes auth_object = nil
-  (column_names - UNRANSACKABLE_ATTRIBUTES) + _ransackers.keys
-end
+	def self.ransackable_attributes auth_object = nil
+		(column_names - UNRANSACKABLE_ATTRIBUTES) + _ransackers.keys
+	end
 end

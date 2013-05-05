@@ -1,0 +1,14 @@
+<div class='container'>
+<br><br><br>
+
+<% if @transactions.empty? %>
+	You haven't made any transactions!
+<% end %>
+
+<% @transactions.each do |t| %>
+	<%= t[0].quantity %> of <%= t[0].ingredient_name %> bought from <%= t[1] %> on <%= t[0].purchase_date %><br>
+<% end %>
+<br><br>
+
+<%= link_to "Make a transaction", new_transaction_path(current_user.id) %>
+</div>

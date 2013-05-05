@@ -16,10 +16,12 @@ Cooperates::Application.routes.draw do
 	match 'users/:id/food' => 'foods#index', :as => :foods_show
 	match 'users/:id/inventory' => 'stocks#index', :as => :stock_show
 	match 'users/:id/inventory/csv' => 'stocks#csv', :as => :stocks_csv
+	match 'users/:id/transactions' => 'transactions#index', :as => :transactions_show
 
   resources :users
   resources :foods
 	resources :stocks
+	resources :transactions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -30,6 +32,7 @@ Cooperates::Application.routes.draw do
 	match 'users/search' => 'users#search'
 	match 'users/:id/food/new' => 'foods#new', :as => 'new_food'
 	match 'users/:id/inventory/new' => 'stocks#new', :as => 'new_stock'
+	match 'users/:id/transactions/new' => 'transactions#new', :as => :new_transaction
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
