@@ -6,7 +6,7 @@
     <!-- Restaurant Profile -->
     <h1>Outward Facing Profile</h1>
     <hr>
-    <% if @user.user_type == "restaurant" %>
+    <% if @user.user_type == "restaurant" %> <!--START-->
     	<% if current_user.id == @user.id %>
     		<strong>Status of Items in Stock:</strong><br>
     		<% if @low_stock.empty? %>
@@ -14,88 +14,89 @@
     		<% end %>
 
     		<% @low_stock.each do |s| %>
-    			<%= s.ingredient_name %> has
-    			<%= s.quantity %> remaining
+      			<%= s.ingredient_name %> has <%= s.quantity %> remaining
 					<%= link_to "Buy more", new_transaction_path(:id => current_user.id, :food => s.ingredient_name) %><br>
     		<% end %>
-    	<% end %>
-    
+    <% end %>
 
-		  <h1><%= best_in_place @user, :username %>'s page</h1>
-		  <ul>
-		  	<h3>Username:</h3>
-		  	<%= @user.username %>
-
-		  	<h3>User type:</h3>
-		  	<%= @user.user_type %>
-
-		  	<h3>Description:</h3>
-		  	<%= raw @user.description %>
-
-		  	<h3>Price Range:</h3>
-		  	<%= @user.price_range %>	
-		  </ul> 
-
-		  <% if current_user.id == @user.id %>
-		  	<p><%= link_to 'Edit Profile', edit_user_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
-		  <% end %>
+		<h1><%= best_in_place @user, :username %>'s page</h1>
+		  <table class="table table-bordered">
+		    <thead>
+		      <tr>
+            <th>Username:</th>
+            <th>User type:</th>
+            <th>Description:</th>
+            <th>Price Range:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @user.username %></td>
+            <td><%= @user.user_type %></td>
+            <td><%= raw @user.description %></td>
+            <td><%= @user.price_range %></td>
+          </tr>
+        </tbody>
+      </table>
+	  <% if current_user.id == @user.id %>
+	  	<p><%= link_to 'Edit Profile', edit_user_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
+	  <% end %>
 		  <br>		  
-		  <% if !@user.address.nil? %>
-				<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}" %>
-			<% end %>
+	  <% if !@user.address.nil? %>
+			<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}" %>
+		<% end %>
 		</div> <!--END OF SECTION-->
 		
-  	<div class="span6"><!--START OF SECTION-->
+  <div class="span6"><!--START OF SECTION-->
 		<h1>Inward Facing Profile</h1>
     <hr>
-	  <h2>Places Near You</h2>
 		<%if !@user.address.nil? %>
+		  <h2>Places Near You</h2>
 			<% for location in @near= @user.nearbys(10) %>
-			<% end %>
-			<% @near.each do |user| %>
-			<li><%= link_to user.username, user_path(user.id) %> </li>
-			<% end %>
-		<%end%>
+  			  <% @near.each do |user| %>
+  			    <li><%= link_to user.username, user_path(user.id) %> </li>
+  			  <% end %>
+		    <%end%>
+		<% end %>
 		
 	<!-- Beginning of IFP -->
 		<% if current_user.id == @user.id %>
-				<h2>Menu</h2>
-				<% @food.each do |f| %>
-					<%= link_to f.name, food_path(f) %>
-					$<%= number_with_precision(f.price, :precision => 2) %><br>
-				<% end %>
-				<%= link_to 'Edit Menu', food_sell_path, :class=>"h3" %><br>
-        
-				<h2>Ingredients Used</h2>
-				<% @ingredients.each do |i| %>
-					<%= i.ingredient_name %><br>
-				<% end %>
-				<%= link_to 'Edit Inventory', stock_show_path, :class => "h3" %>
+			<h2>Menu</h2>
+			<% @food.each do |f| %>
+				<%= link_to f.name, food_path(f) %>
+				<%= number_with_precision(f.price, :precision => 2) %><br>
+			<% end %>
+			<%= link_to 'Edit Menu', food_sell_path, :class=>"h3" %><br>
+      
+			<h2>Ingredients Used</h2>
+			<% @ingredients.each do |i| %>
+				<%= i.ingredient_name %><br>
+			<% end %>
+			<%= link_to 'Edit Inventory', stock_show_path, :class => "h3" %>
 				
-				<br><br>
+			<br><br>
 			
-		    <h2>Optimal Cooperates! Restaurant Matches</h2>
-		    <%@c.each do |user|%>
-		    <%= link_to user.username, user_path(user.id)%></br>
-		    <%end%>
-		    <% @c.inspect%>
+	    <h2>Optimal Restaurant Matches</h2>
+  	    <%@c.each do |user|%>
+    	    <%= link_to user.username, user_path(user.id)%></br>
+  	    <%end%>
+	    <% @c.inspect%>
 		    
-		    <h2>Optimal Cooperates! Supplier Matches</h2>
-		    <%@f.each do |user|%>
-		    <%= link_to user.username, user_path(user.id)%></br>
-		    <%end%>
-		    <% @f.inspect%>
+	    <h2>Optimal Supplier Matches</h2>
+  	    <%@f.each do |user|%>
+    	    <%= link_to user.username, user_path(user.id)%></br>
+  	    <%end%>
+	    <% @f.inspect%>
+
 		  	<!--<h2>Import Products</h2>
 		  		<%= form_tag import_stocks_path, multipart: true do %>
 		    		<%= file_field_tag :file %><br>
 		    		<%= submit_tag "Import", :class=>'btn' %>
 		  	<% end %>-->
-		<% end %>
-	<!-- End of IFP -->	
-<% else %>
+  <% end %>
 <!-- End of Restaurant Profile -->
+<% else %>
 <!-- Start of Supplier Profile -->
-
 	<div class="row">
 		<div class="span6"><!--START OF SECTION-->
 
