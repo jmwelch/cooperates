@@ -3,10 +3,19 @@ class StocksController < ApplicationController
 	def index
 		@user = User.find(params[:id])
 		@stock = @user.stocks
+
+		if current_user.id != params[:id].to_i
+			redirect_to user_path(@user), :notice => "You cannot view #{@user.username}'s inventory!"
+		end
 	end
 
 	def show
 		@stock = Stock.find(params[:id])
+		@user = User.find(@stock.user_id)
+
+		if current_user.id != params[:id].to_i
+			redirect_to user_path(@user), :notice => "You cannot view #{@user.username}'s inventory!"
+		end
 	end
 
 	def new
@@ -40,7 +49,7 @@ class StocksController < ApplicationController
 		@user = User.find(@stock.user_id)
 
 		if current_user.id != @stock.user_id
-			redirect_to foods_show_path(@food.user_id), :notice => "You cannot edit #{@user.username}'s food!"
+			redirect_to foods_show_path(@food.user_id), :notice => "You cannot edit #{@user.username}'s inventory!"
 		end
 	end
 
