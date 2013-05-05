@@ -23,6 +23,11 @@ class StocksController < ApplicationController
 		@stock = Stock.new(params[:stock])
 		@stock.user_id = current_user.id
 
+		s = Stock.where(:ingredient_name => @stock.ingredient_name, :user_id => @stock.user_id)
+		if !s.empty?
+			redirect_to stock_path(s.first.id), :notice => "This ingredient is already in your inventory!" and return
+		end
+
 		if @stock.save
 			redirect_to @stock
 		else
