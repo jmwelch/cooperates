@@ -27,6 +27,13 @@ class TransactionsController < ApplicationController
 
 	def create
 		@transaction = Transaction.new(params[:transaction])
+
+		# Ensures positive numbers are used for quantity
+		if @transaction.quantity < 0
+			flash[:notice] = "Quantity must be positive!"
+			render 'new', :food => params[:transaction][:ingredient_name] and return
+		end
+
 		u = User.where(:username => params[:transaction][:bought_from])
 		# If the supplier is not found, redirect
 		if u.empty?
