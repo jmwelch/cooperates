@@ -70,7 +70,7 @@
       
 			<h2>Ingredients Used</h2>
 			<% @ingredients.each do |i| %>
-				<%= i.ingredient_name %><br>
+				<%= link_to i.ingredient_name, stock_path(i.id) %><br>
 			<% end %>
 			<%= link_to 'Edit Inventory', stock_show_path, :class => "h3" %>
 				

@@ -23,10 +23,13 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	@food = @user.foods
     #@ingredients = @user.ingredients.select(:ingredient_name).uniq.sort_by{|u| u.ingredient_name}
-    @ingredients = @user.stocks.select(:ingredient_name).sort_by{|u| u.ingredient_name}
+    @ingredients = @user.stocks.sort_by{|u| u.ingredient_name}
 ####################
     @a=[]
     @b=[]
+# can you please rename these variables to something helpful?
+
+# where is @allingredients coming from?
     @restOfIngred = @allingredients - @user.ingredients
     @user.ingredients.each do |myingredient|
     	@restOfIngred.each do |youringredient|
