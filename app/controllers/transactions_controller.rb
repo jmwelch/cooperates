@@ -20,7 +20,11 @@ class TransactionsController < ApplicationController
 
 	def new
 		if current_user.id != params[:id].to_i
-			redirect_to user_path(params[:id]), :notice => "You can't make a transactions for others!"
+			redirect_to user_path(params[:id]), :notice => "You can't make a transactions for others!" and return
+		end
+
+		if current_user.user_type == 'supplier'
+			redirect_to stock_show_url(:id => current_user.id), :notice => "Transactions have to be initiated by a restaurant!"
 		end
 		@transaction = Transaction.new
 	end
