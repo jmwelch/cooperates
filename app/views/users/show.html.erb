@@ -1,27 +1,25 @@
 <div class="container">
 <br><br>
-<h2><%= @user.username.capitalize %>'s Data</h2>
 
-<!-- Restaurant Profile -->
-<% if @user.user_type == "restaurant" %>
-	<% if current_user.id == @user.id %>
-		<h3>Items Low on Stock</h3>
-		<% if @low_stock.empty? %>
-			Inventory at adequate levels!
-		<% end %>
+<div class="row">
+	<div class="span6"><!--START OF SECTION-->
+    <!-- Restaurant Profile -->
+    <h1>Outward Facing Profile</h1>
+    <hr>
+    <% if @user.user_type == "restaurant" %>
+    	<% if current_user.id == @user.id %>
+    		<strong>Status of Items in Stock:</strong>
+    		<% if @low_stock.empty? %>
+    			Inventory is empty!
+    		<% end %>
 
-		<% @low_stock.each do |s| %>
-			<%= s.ingredient_name %> has
-			<%= s.quantity %> remaining<br>
-		<% end %>
-	<% end %>
+    		<% @low_stock.each do |s| %>
+    			<%= s.ingredient_name %> has
+    			<%= s.quantity %> remaining<br>
+    		<% end %>
+    	<% end %>
+    
 
-	<div class="row">
-		<div class="span6"><!--START OF SECTION-->
-
-			<% if !@user.address.nil? %>
-				<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}" %>
-			<% end %>
 		  <h1><%= best_in_place @user, :username %>'s page</h1>
 		  <ul>
 		  	<h3>Username:</h3>
@@ -34,43 +32,46 @@
 		  	<%= raw @user.description %>
 
 		  	<h3>Price Range:</h3>
-		  	<%= @user.price_range %>
-	
+		  	<%= @user.price_range %>	
 		  </ul> 
 
-		  <br>
 		  <% if current_user.id == @user.id %>
 		  	<p><%= link_to 'Edit Profile', edit_user_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
 		  <% end %>
-		  <br>
+		  <br>		  
+		  <% if !@user.address.nil? %>
+				<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}" %>
+			<% end %>
 		</div> <!--END OF SECTION-->
-
-	<div class="span6">
+		
+  	<div class="span6"><!--START OF SECTION-->
+		<h1>Inward Facing Profile</h1>
+    <hr>
+	  <h2>Places Near You</h2>
 		<%if @user.address != nil%>
 			<% for location in @user.nearbys(10) %>
 		  <li><%= link_to @user.address, location %> </li>
 		  <% end %>
 		<%end%>
+		
 	<!-- Beginning of IFP -->
 		<% if current_user.id == @user.id %>
-				<h1>IFP</h1>
 				<h2>Menu</h2>
 				<% @food.each do |f| %>
 					<%= link_to f.name, food_path(f) %>
 					$<%= number_with_precision(f.price, :precision => 2) %><br>
 				<% end %>
+				<%= link_to 'Edit Menu', 'food', :class=>"h3" %><br>
+        
 				<h2>Ingredients Used</h2>
 				<% @ingredients.each do |i| %>
 					<%= i.ingredient_name %><br>
 				<% end %>
-
+				<%= link_to 'Edit Inventory', stock_show_path, :class => "h3" %>
+				
 				<br><br>
-
-				<p><%= link_to 'Edit Inventory', stock_show_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
 			
-		    <h2>Cooperate! Recommendations</h2>
-		    </br>
-		    Restaurants that share the same ingredients</br>
+		    <h2>Optimal Cooperates! Matches</h2>
 		    <%@c.each do |user|%>
 		    <%= user.username%></br>
 		    <%end%>
