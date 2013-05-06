@@ -7,15 +7,20 @@
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
-@import url(http://fonts.googleapis.com/css?family=Doppio+One);
+@import url(http://fonts.googleapis.com/css?family=Didact+Gothic);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url(http://fonts.googleapis.com/css?family=Metrophobic);
 
 a.edit_link {
-	font-family: 'Doppio One', sans-serif;
 	color: #728FCE;
 }
 
-p {
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+p, ol, ul, td, strong, a, body {
+	font-family: 'Metrophobic', sans-serif !important;
+}
+
+h1, h2, h3{
+	font-family: 'Metrophobic', sans-serif !important;
 }
 
 .logo {
@@ -26,8 +31,8 @@ p {
 	margin-right: auto;
 	display: block;
 	max-width: 100%;
-
 }
+
 
 .carousel_image{
 	min-width: 100%;
