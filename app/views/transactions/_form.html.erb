@@ -20,18 +20,18 @@
 	<% end %>
 
   <div class="field">
-    <%= f.label "Ingredient to be Bought" %><br />
+    <%= f.label "Ingredient to be Bought" %>
     <%= f.text_field :ingredient_name, :value => val %>
   </div>
   <div class="field">
-    <%= f.label :quantity %><br />
+    <%= f.label :quantity %>
     <%= f.number_field :quantity %>
   </div>
   <div class="field">
-    <%= f.label :supplier %><br />
+    <%= f.label :supplier %>
     <%= f.text_field :bought_from %>
   </div>
 	<div class="actions">
-    <%= f.submit %>
+    <%= f.submit :Submit, :class=>'btn' %>
   </div>
 <% end %>
