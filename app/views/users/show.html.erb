@@ -71,7 +71,7 @@
 			<% @food.each do |f| %>
 			  <tr>
   				<td><%= link_to f.name, food_path(f) %></td>
-  				<td><%= number_with_precision(f.price, :precision => 2) %></td>
+  				<td>$<%= number_with_precision(f.price, :precision => 2) %></td>
   			</tr>
 			<% end %>
 			</table>
