@@ -1,25 +1,29 @@
 <div class="container">
-<br><br><br>
-<h1><%= @food.name %></h1>
-<h2>Price: $<%= number_with_precision(@food.price, :precision => 2) %></h2>
-<h3>Ingredients:</h3>
-<table class="table table-bordered">
-	<tr>
-		<td><strong>Name</strong></td>
-		<td><strong>Quantity</strong></td>
-		<td><strong>Modify</strong></td>		
-	</tr>
-	<% @food.ingredients.each do |i| %>
-		<tr>
-			<td><%= i.ingredient_name %></td>
-			<td><%= i.quantity_used %></td>
-			<td><%= link_to "Edit this Food", edit_food_path(@food) %><br>
-			<%= link_to "Remove this Food", @food, :confirm => "Are you sure you want to permanantly remove this item?", :method=>:delete, :class=>:destroy %></td>
-		</tr>
-	<% end %>
-</table>
+	<br><br><br>
+	<h1><%= @food.name %></h1>
+	<h2>Price: $<%= number_with_precision(@food.price, :precision => 2) %></h2>
 
-<% if current_user.id == @food.user_id %>
-	<%= link_to "Add more food?", new_food_path(current_user.id), {:style => "font-size: 20px;"} %><br>
-<% end %>
-<%= link_to "See All Food", foods_show_path(:id => current_user.id), {:style => "font-size: 20px;"} %>
+	<% if current_user.id == @food.user_id %>
+		<%= link_to "Edit this Food", edit_food_path(@food) %><br>
+		<%= link_to "Remove this Food", @food, :confirm => "Are you sure you want to permanantly remove this item?", :method=>:delete, :class=>:destroy %><br>
+	<% end %>
+
+	<h3>Ingredients:</h3>
+	<table class="table table-bordered">
+		<tr>
+			<td><strong>Name</strong></td>
+			<td><strong>Quantity</strong></td>
+		</tr>
+		<% @food.ingredients.each do |i| %>
+			<tr>
+				<td><%= i.ingredient_name %></td>
+				<td><%= i.quantity_used %></td>
+			</tr>
+		<% end %>
+	</table>
+
+	<% if current_user.id == @food.user_id %>
+		<%= link_to "Add more food?", new_food_path(current_user.id), {:style => "font-size: 20px;"} %><br>
+	<% end %>
+	<%= link_to "See All Food", foods_show_path(:id => current_user.id), {:style => "font-size: 20px;"} %>
+</div>
