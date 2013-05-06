@@ -33,7 +33,7 @@
           <tr>
             <td><%= @user.username %></td>
             <td><%= @user.user_type %></td>
-            <td><%= raw @user.description %></td>
+            <td><%= raw( sanitize(@user.description, :tags => %w(br strong i p h1 h2 h3 a href))) %></td>
             <td><%= @user.price_range %></td>
           </tr>
         </tbody>
