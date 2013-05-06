@@ -26,14 +26,22 @@
 	<% if @stock.empty? %>
 		<p>Inventory appears to be empty!</p>
 	<% else %>
+	<table class="table table-bordered">
+    <tr>
+      <td>Stock Item</td>
+      <td>Quantity</td>
+      <td>Status</td>
+    </tr>
 		<% @stock.each do |s| %>
-			<%= link_to s.ingredient_name, stock_path(s) %>
-			- <%= s.quantity %>
-			<% if s.quantity < 20 %>
+		<tr>
+			<td><%= link_to s.ingredient_name, stock_path(s) %></td>
+			<td><%= s.quantity %></td>
+			<td><% if s.quantity < 20 %>
 				<%= p " - This item is low on stock!" %>
 				<%= link_to "Restock?", stock_show_path(:id => current_user.id, :ingredient => s.ingredient_name), :method => 'post' %>
-			<% end %>
+			<% end %></td>
 		<% end %>
+		</tr></table>
 	<% end %>
 <% end %>
 
