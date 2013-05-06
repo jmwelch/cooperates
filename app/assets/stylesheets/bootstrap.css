@@ -11,8 +11,8 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu);
 @import url(http://fonts.googleapis.com/css?family=Metrophobic);
 
-a.edit_link {
-	color: #728FCE;
+a, a:visited {
+	color: #05aaff;
 }
 
 p, ol, ul, td, strong, a, body {
