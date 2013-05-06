@@ -8,6 +8,7 @@ describe User do
       :email => "user@example.com",
       :password => "changeme",
       :password_confirmation => "changeme"
+      :user_type => "restaurant"
     }
   end
 

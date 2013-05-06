@@ -1,8 +1,7 @@
 ### UTILITY METHODS ###
 
 def create_visitor
-  @visitor ||= { :username => "TestyMcUserton", :email => "what@what.com",
-    :password => "changeme", :password_confirmation => "changeme" }
+  @visitor ||= {}
 end
 
 def find_user
@@ -30,18 +29,19 @@ end
 def sign_up
   delete_user
   visit '/users/sign_up'
-  fill_in "user_username", :with => @visitor[:username]
-  fill_in "user_email", :with => @visitor[:email]
-  fill_in "user_password", :with => @visitor[:password]
-  fill_in "user_password_confirmation", :with => @visitor[:password_confirmation]
+  fill_in "Username", :with => @visitor[:name]
+  fill_in "Email", with: @visitor[:email] 
+  fill_in "Password", :with => @visitor[:password]
+  fill_in "Password confirmation", :with => @visitor[:password_confirmation]
+  fill_in "User type", :with => @visitor[:user_type]
   click_button "Sign up"
   find_user
 end
 
 def sign_in
   visit '/users/sign_in'
-  fill_in "user_email", :with => @visitor[:email]
-  fill_in "user_password", :with => @visitor[:password]
+  fill_in "Email", :with => @visitor[:email]
+  fill_in "password", :with => @visitor[:password]
   click_button "Sign in"
 end
 
@@ -187,5 +187,5 @@ end
 
 Then /^I should see my name$/ do
   create_user
-  page.should have_content @user[:username]
+  page.should have_content @user[:name]
 end
