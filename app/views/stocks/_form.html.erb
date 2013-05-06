@@ -2,7 +2,6 @@
   <% if @stock.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@stock.errors.count, "error") %> prohibited this stock from being saved:</h2>
-
       <ul>
       <% @stock.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -12,17 +11,17 @@
   <% end %>
 
   <div class="field">
-    <%= f.label "Ingredient Name" %><br />
+    <%= f.label "Ingredient Name" %>
     <%= f.text_field :ingredient_name %>
   </div>
   <div class="field">
-    <%= f.label "Quantity in Stock" %><br />
+    <%= f.label "Quantity in Stock" %>
     <%= f.number_field :quantity %>
   </div>
 	<% if @user.user_type == 'restaurant' %>
 		<%= render 'rest_form', :f => f %>
 	<% end %>
 	<div class="actions">
-    <%= f.submit %>
+    <%= f.submit :Update, {:class=>'btn', :text=>"Update Stock"} %>
   </div>
 <% end %>

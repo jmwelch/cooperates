@@ -1,14 +1,14 @@
 <div class='container'>
 	<br><br><br>
 
-	<%= @stock.ingredient_name %> has
-	<%= @stock.quantity %> left
+	<h3><%= @stock.ingredient_name.capitalize %> has <%= @stock.quantity %> left</h3>
 	<% if @stock.quantity < @stock.low_quantity %>
-		- This ingredient is low on stock!
+		- This ingredient is <strong style="color:#05aaff">low on stock!</strong>
 		<%= link_to "Buy more?", new_transaction_path(:id => current_user.id, :food => @stock.ingredient_name) %>
+	<% else %>
+	  - This ingredient's stock status is <strong style="color:#05aaff">good!</strong>
 	<% end %><br><br>
-
-	Last transaction:<br>
+	<h2>Transaction History:</h2>
 	<% if !@last_trans.nil? %>
 		Bought <%= @last_trans.quantity %> from <%= @supplier.username %> on <%= @last_trans.purchase_date.strftime "%B %d, %Y" %>
 	<% else %>

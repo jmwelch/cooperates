@@ -5,13 +5,22 @@
 	<% if @stock.empty? %>
 		<p>Inventory appears to be empty!</p>
 	<% else %>
+	  <table class="table table-bordered">
+	    <tr>
+	      <td>Stock Item</td>
+	      <td>Quantity</td>
+	      <td>Status</td>
+	    </tr>
 		<% @stock.each do |s| %>
-			<%= link_to s.ingredient_name, stock_path(s) %>
-			<% if s.quantity < s.low_quantity %>
-				<%= p " - This item is low on stock!" %>
-				<%= link_to "Buy more?", new_transaction_path(current_user.id, :food => s.ingredient_name) %>
-			<% end %><br>
+		  <tr>
+		    <td><%= link_to s.ingredient_name, stock_path(s) %></td>
+		    <td><%= s.quantity %></td>
+		    <td><% if s.quantity < s.low_quantity %>
+  				<%= p " - This item is low on stock!" %>
+  				<%= link_to "Buy more?", new_transaction_path(current_user.id, :food => s.ingredient_name) %>
+  			<% end %></td>
 		<% end %>
+		</tr></table>
 	<% end %>
 <% else %>
 	<% if @stock.empty? %>
@@ -23,11 +32,11 @@
 			<% if s.quantity < 20 %>
 				<%= p " - This item is low on stock!" %>
 				<%= link_to "Restock?", stock_show_path(:id => current_user.id, :ingredient => s.ingredient_name), :method => 'post' %>
-			<% end %><br>
+			<% end %>
 		<% end %>
 	<% end %>
 <% end %>
-<br>
-<%= link_to "Add an item to your Inventory", new_stock_path %><br>
-<%= link_to "Edit Inventory via CSV", stocks_csv_path %>
+
+<%= link_to "Add an item to your Inventory", new_stock_path, :style=>"font-size:20px" %><br>
+<%= link_to "Edit Inventory via CSV", stocks_csv_path, :style=>"font-size:20px" %>
 </div>
