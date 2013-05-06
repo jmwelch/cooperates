@@ -32,14 +32,12 @@
 		  <%= f.submit "Update User", :class=>'btn' %>
 		</div>
 	<% end %>
-
-	<br><br>
 	<% if !@food.nil? && !@food.empty? %>
 		<%= form_for(@food) do |f| %>
 			<div class="field">
 				<%= f.label :fname %>
 				<%= f.text_field :fname %>
-			</div>
+			</div>  
 		<% end %>
 	<% end %>
 </div>
