@@ -4,21 +4,9 @@
 <div class="row">
 	<div class="span6"><!--START OF SECTION-->
     <!-- Restaurant Profile -->
-    <h1>Outward Facing Profile</h1>
+    <center><h1>Outward Facing Profile</h1></center>
     <hr>
     <% if @user.user_type == "restaurant" %> <!--START-->
-    	<% if current_user.id == @user.id %>
-    		<strong>Status of Items in Stock:</strong><br>
-    		<% if @low_stock.empty? %>
-    			Inventory is empty!
-    		<% end %>
-
-    		<% @low_stock.each do |s| %>
-      			<%= s.ingredient_name %> has <%= s.quantity %> remaining
-					<%= link_to "Buy more", new_transaction_path(:id => current_user.id, :food => s.ingredient_name) %><br>
-    		<% end %>
-    <% end %>
-
 		<h1><%= best_in_place @user, :username %>'s page</h1>
 		  <table class="table table-bordered">
 		    <thead>
@@ -38,8 +26,21 @@
           </tr>
         </tbody>
       </table>
-	  <% if current_user.id == @user.id %>
-	  	<p><%= link_to 'Edit Profile', edit_user_path, {:style => "font-size: 35px; color: #728FCE"} %></p>
+      	<% if current_user.id == @user.id %>
+      		<h4><strong style="font-size: 20px;">Status of Items in Stock:</strong></h4>
+      		<% if @low_stock.empty? %>
+      			Inventory is empty!
+      		<% end %>
+
+      		<% @low_stock.each do |s| %>
+        			<%= s.ingredient_name %> has <%= s.quantity %> remaining
+  					<%= link_to "Buy more", new_transaction_path(:id => current_user.id, :food => s.ingredient_name) %><br>
+      		<% end %>
+      <% end %>
+      <br>
+      <br>
+  	  <% if current_user.id == @user.id %>
+	  	<p><%= link_to 'Edit Your Profile', edit_user_path, {:style => "font-size: 20px;"} %></p>
 	  <% end %>
 		  <br>		  
 	  <% if !@user.address.nil? %>
@@ -48,7 +49,7 @@
 		</div> <!--END OF SECTION-->
 		
   <div class="span6"><!--START OF SECTION-->
-		<h1>Inward Facing Profile</h1>
+		<center><h1>Inward Facing Profile</h1></center>
     <hr>
 		<%if !@user.address.nil? %>
 		  <h2>Places Near You</h2>
@@ -62,16 +63,33 @@
 	<!-- Beginning of IFP -->
 		<% if current_user.id == @user.id %>
 			<h2>Menu</h2>
+			<table class="table table-bordered">
+			  <tr>
+			    <th>Food Name</th>
+			    <th>Food Price</th>
+			  </tr>
 			<% @food.each do |f| %>
-				<%= link_to f.name, food_path(f) %>
-				$<%= number_with_precision(f.price, :precision => 2) %><br>
+			  <tr>
+  				<td><%= link_to f.name, food_path(f) %></td>
+  				<td><%= number_with_precision(f.price, :precision => 2) %></td>
+  			</tr>
 			<% end %>
+			</table>
 			<%= link_to 'Edit Menu', food_sell_path, :class=>"h3" %><br>
       
 			<h2>Ingredients Used</h2>
+			<table class="table table-bordered">
+			  <tr>
+			    <th>Ingredient Name</th>
+			    <th>Ingredient Qty</th>
+			  </tr>
 			<% @ingredients.each do |i| %>
-				<%= link_to i.ingredient_name, stock_path(i.id) %><br>
+			  <tr>
+  				<td><%= link_to i.ingredient_name, stock_path(i.id) %></td>
+  				<td><%= i.quantity %></td>
+  			</tr>
 			<% end %>
+			</table>
 			<%= link_to 'Edit Inventory', stock_show_path, :class => "h3" %>
 				
 			<br><br>

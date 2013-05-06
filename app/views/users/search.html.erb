@@ -2,26 +2,22 @@
 	<br><br><br>
 
 	<%= search_form_for @search, url: users_search_path, method: :post do |f| %>
-	public search
-
+	<h2>Public Search</h2>
 	</br>
 	<%= label_tag :within %>
     <%= text_field_tag :within, params[:within] %> miles
 	</br>
 	<%@test.inspect%>
 	<%if @params == nil%>
-	<%= f.condition_fields do |c| %>
-	<%= render "condition_fields", f: c %>
-	<% end %>
-	<%= f.condition_fields do |c| %>
-	<%= render "condition_fields", f: c %>
-	<% end %>
-	<%= f.condition_fields do |c| %>
-	<%= render "condition_fields", f: c %>
-	<% end %>
-	<%= f.condition_fields do |c| %>
-	<%= render "condition_fields", f: c %>
-	<% end %>
+	  <%= f.condition_fields do |c| %>
+  	<%= render "condition_fields", f: c %>
+  	<% end %>
+  	<%= f.condition_fields do |c| %>
+  	<%= render "condition_fields", f: c %>
+  	<% end %>
+  	<%= f.condition_fields do |c| %>
+  	<%= render "condition_fields", f: c %>
+  	<% end %>
 
 	<p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
 	<div class="field">
@@ -29,25 +25,43 @@
 		<%= f.sort_fields do |s| %>
 		<%= s.sort_select %>
 		<% end %>
-
 		<%else%>
-		<%="results"%>
+		<%="Results"%>
 		<%end%>
 		<%if @params == nil%>
 	</div>
-	<div class="actions"><%= f.submit "Search" %>
+	
+	<div class="actions"><%= f.submit "Search", :class=>'btn' %>
 	</div>
+	
 	<%else%>
-</div>
-<div class="actions"><%= f.submit "New Search" %>
-</div>
+  </div>
+  <div class="container">
+  <div class="actions"><%= f.submit "New Search", :class=>'btn' %>
+  </div>
 <% end %>
-
 
 <% end %>
 
 <%if @params != nil%>
-<% @users.each do |user| %>
-<%= user.username%></br>
+<h2> Your Search Results </h2>
+<table class="table table-bordered">
+		  <tr>
+		    <th> User </th>
+		    <th> User Type </th>
+		    <th> Description </th>
+		    <th> Price Range </th>
+		    <th> Rating </th>
+		  </tr>
+  		<% @users.each do |user| %>
+  		  <tr>
+  		    <td><%= link_to user.username, user %>
+    		  <td><%= user.user_type %>
+  		    <td><%= user.description %></td>
+  		    <td><%= user.price_range %></td>
+  		    <td><%= user.rating %></td>
+  		 </tr>
+      <%end%>
+  </table>
 <%end%>
-<%end%>
+</div>
