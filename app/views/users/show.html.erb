@@ -55,6 +55,9 @@
 		  <h2>Places Near You</h2>
 			<% for location in @near= @user.nearbys(10) %>
 				<% end %>
+					<% if @near.empty? %>
+						No nearby places found!
+					<% end %>
   			  <% @near.each do |user| %>
   			    <li><%= link_to user.username, user_path(user.id) %> </li>
 		    <%end%>
@@ -63,33 +66,41 @@
 	<!-- Beginning of IFP -->
 		<% if current_user.id == @user.id %>
 			<h2>Menu</h2>
-			<table class="table table-bordered">
-			  <tr>
-			    <th>Food Name</th>
-			    <th>Food Price</th>
-			  </tr>
-			<% @food.each do |f| %>
-			  <tr>
-  				<td><%= link_to f.name, food_path(f) %></td>
-  				<td>$<%= number_with_precision(f.price, :precision => 2) %></td>
-  			</tr>
+			<% if !@food.empty? %>
+				<table class="table table-bordered">
+					<tr>
+					  <th>Food Name</th>
+					  <th>Food Price</th>
+					</tr>
+				<% @food.each do |f| %>
+					<tr>
+						<td><%= link_to f.name, food_path(f) %></td>
+						<td>$<%= number_with_precision(f.price, :precision => 2) %></td>
+					</tr>
+				<% end %>
+				</table>
+			<% else %>
+				No items currently added to Menu!<br>
 			<% end %>
-			</table>
 			<%= link_to 'Edit Menu', food_sell_path, :class=>"h3" %><br>
       
 			<h2>Ingredients Used</h2>
-			<table class="table table-bordered">
-			  <tr>
-			    <th>Ingredient Name</th>
-			    <th>Ingredient Qty</th>
-			  </tr>
-			<% @ingredients.each do |i| %>
-			  <tr>
-  				<td><%= link_to i.ingredient_name, stock_path(i.id) %></td>
-  				<td><%= i.quantity %></td>
-  			</tr>
+			<% if !@ingredients.empty? %>
+				<table class="table table-bordered">
+					<tr>
+					  <th>Ingredient Name</th>
+					  <th>Ingredient Qty</th>
+					</tr>
+				<% @ingredients.each do |i| %>
+					<tr>
+						<td><%= link_to i.ingredient_name, stock_path(i.id) %></td>
+						<td><%= i.quantity %></td>
+					</tr>
+				<% end %>
+				</table>
+			<% else %>
+				Inventory appears to be empty!<br>
 			<% end %>
-			</table>
 			<%= link_to 'Edit Inventory', stock_show_path, :class => "h3" %>
 				
 			<br><br>
