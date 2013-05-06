@@ -27,22 +27,9 @@ def delete_user
 end
 
 def sign_up
-  delete_user
-  visit '/users/sign_up'
-  fill_in "Username", :with => @visitor[:name]
-  fill_in "Email", with: @visitor[:email] 
-  fill_in "Password", :with => @visitor[:password]
-  fill_in "Password confirmation", :with => @visitor[:password_confirmation]
-  fill_in "User type", :with => @visitor[:user_type]
-  click_button "Sign up"
-  find_user
 end
 
 def sign_in
-  visit '/users/sign_in'
-  fill_in "Email", :with => @visitor[:email]
-  fill_in "password", :with => @visitor[:password]
-  click_button "Sign in"
 end
 
 ### GIVEN ###
