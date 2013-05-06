@@ -11,5 +11,4 @@ class Stock < ActiveRecord::Base
         stock.save!
     end
   end
-
 end
