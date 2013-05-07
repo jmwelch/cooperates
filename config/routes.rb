@@ -17,6 +17,7 @@ Cooperates::Application.routes.draw do
 	match 'users/:id/food' => 'foods#index', :as => :foods_show
 	match 'users/:id/inventory' => 'stocks#index', :as => :stock_show
 	match 'users/:id/inventory/csv' => 'stocks#csv', :as => :stocks_csv
+	match 'users/:id/inventory/upload' => 'stocks#show_upload', :as => :upload_show
 	match 'users/:id/transactions' => 'transactions#index', :as => :transactions_show
 
   resources :users

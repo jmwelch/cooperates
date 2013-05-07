@@ -1,0 +1,20 @@
+<div class='container'>
+	<br><br><br>
+
+	<table class="table table-bordered">
+		<tr>
+			<td>Ingredient Imported</td>
+			<td>Quantity Imported</td>
+			<td>Threshold for Buying More</td>
+		</tr>
+		<% @stocks.each do |s| %>
+			<tr>
+				<td><%= s.ingredient_name %></td>
+				<td><%= s.quantity %></td>
+				<td><%= s.low_quantity %></td>
+			</tr>
+		<% end %>
+	</table>
+
+	<%= link_to "View Inventory", stock_show_path(current_user.id) %>
+</div>
