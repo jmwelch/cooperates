@@ -53,13 +53,12 @@ class FoodsController < ApplicationController
   end
 
   def update
-		@user = User.find(params[:id])
+		@food = Food.find(params[:id])
+		@user = User.find(@food.user_id)
 
-		if current_user.id != params[:id].to_i
-			redirect_to foods_show_path(@user.id), :notice => "You cannot edit #{@user.username}'s food!" and return
+		if current_user.id != @food.user_id
+			redirect_to foods_show_path(@food.user_id), :notice => "You cannot edit #{@user.username}'s food!" and return
 		end
-
-    @food = Food.find(params[:id])
 
 		if @food.update_attributes(params[:food])
 			redirect_to @food
