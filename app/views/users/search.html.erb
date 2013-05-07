@@ -3,12 +3,14 @@
 
 	<%= search_form_for @search, url: users_search_path, method: :post do |f| %>
 	<h2>Public Search</h2>
+	
+	<%@test.inspect%>
+
+	<%if @params == nil%>
 	</br>
 	<%= label_tag :within %>
     <%= text_field_tag :within, params[:within] %> miles
 	</br>
-	<%@test.inspect%>
-	<%if @params == nil%>
 	  <%= f.condition_fields do |c| %>
   	<%= render "condition_fields", f: c %>
   	<% end %>
@@ -26,7 +28,6 @@
 		<%= s.sort_select %>
 		<% end %>
 		<%else%>
-		<%="Results"%>
 		<%end%>
 		<%if @params == nil%>
 	</div>
@@ -51,7 +52,6 @@
 		    <th> User Type </th>
 		    <th> Description </th>
 		    <th> Price Range </th>
-		    <th> Rating </th>
 		  </tr>
   		<% @users.each do |user| %>
   		  <tr>
@@ -59,7 +59,6 @@
     		  <td><%= user.user_type %>
   		    <td><%= user.description %></td>
   		    <td><%= user.price_range %></td>
-  		    <td><%= user.rating %></td>
   		 </tr>
       <%end%>
   </table>
