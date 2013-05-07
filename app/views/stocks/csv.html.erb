@@ -13,7 +13,7 @@ The second column is for the quantity of the ingredient imported.<br>
 <p>
 <%= form_tag import_stocks_path, multipart: true do %>
   <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
+  <%= submit_tag "Import", :class=>'btn' %>
 <% end %>
 
 </p>
