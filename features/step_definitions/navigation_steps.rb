@@ -92,6 +92,10 @@ Then /^page should have (.+) message "([^\"]*)"$/ do |type, text|
   page.has_css?("p.#{type}", :text => text, :visible => true)
 end
 
+Then /^I should see the image alt "([^"]*)"$/ do |alt_text|
+  page.should have_css('img', :alt => alt_text)
+end
+
 Given /^I am a new, authenticated user$/ do
   email = 'pan@era.com'
   password = 'panera'
