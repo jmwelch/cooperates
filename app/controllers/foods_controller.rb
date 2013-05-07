@@ -56,7 +56,7 @@ class FoodsController < ApplicationController
 		@user = User.find(params[:id])
 
 		if current_user.id != params[:id].to_i
-			redirect_to foods_show_path(@user.id), :notice => "You cannot edit #{@user.username}'s food!"
+			redirect_to foods_show_path(@user.id), :notice => "You cannot edit #{@user.username}'s food!" and return
 		end
 
     @food = Food.find(params[:id])
