@@ -10,20 +10,10 @@ group :production do
 end
 group :development, :test do
   gem 'sqlite3'  
+  gem "rspec-rails", ">= 2.0.1"
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
 end
-
-gem 'rspec-rails', :group => [:development, :test]
-gem "factory_girl_rails", :group => [:development, :test]
-gem "database_cleaner", :group => :test
-gem "email_spec", :group => :test
-
-gem "cucumber-rails", :group => :test, :require => false
-gem "capybara", :group => :test
-gem "database_cleaner", :group => :test
-gem "email_spec", :group => :test
-
-#gem "sqlite3", group: :sqlite3
-#gem "pg", group: :postgres
 
 gem 'seed-fu', '~> 2.2.0'
 gem 'devise'

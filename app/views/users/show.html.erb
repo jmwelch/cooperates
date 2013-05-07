@@ -71,7 +71,7 @@
 			<% @food.each do |f| %>
 			  <tr>
   				<td><%= link_to f.name, food_path(f) %></td>
-  				<td>$<%= number_with_precision(f.price, :precision => 2) %></td>
+  				<td><%= number_with_precision(f.price, :precision => 2) %></td>
   			</tr>
 			<% end %>
 			</table>
@@ -106,11 +106,11 @@
   	    <%end%>
 	    
 
-		  	<h2>Import CSV</h2>
+		  	<!--<h2>Import Products</h2>
 		  		<%= form_tag import_stocks_path, multipart: true do %>
 		    		<%= file_field_tag :file %><br>
 		    		<%= submit_tag "Import", :class=>'btn' %>
-		  	<% end %>
+		  	<% end %>-->
   <% end %>
 <!-- End of Restaurant Profile -->
 <% else %>
