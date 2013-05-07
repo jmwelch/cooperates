@@ -19,7 +19,7 @@ RSpec.configure do |config|
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
+  #config.include Devise::Testhelpers, :type=>controller
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -35,4 +35,11 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  Capybara.configure do |config|
+  config.match = :one
+  config.exact_options = true
+  config.ignore_hidden_elements = true
+  config.visible_text_only = true
+end
 end

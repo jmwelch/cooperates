@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @common_ingred=[]
     @recommended_user=[]
 
-# where is @allingredients coming from?//application_controller.rb
+#finds other users that have use same ingredients
     @restOfIngred = Ingredient.all - @user.ingredients
     @user.ingredients.each do |myingredient|
     	@restOfIngred.each do |youringredient|
@@ -46,7 +46,8 @@ class UsersController < ApplicationController
     	end
     end
     @final_comm_ingred_list = @recommended_user.uniq
-#########################
+
+#find suppliers that sell the same ingredients as user
     @common_stock=[]
     @recommended_user=[]
     @restOfStock = Stock.all - @user.stocks
@@ -66,6 +67,7 @@ class UsersController < ApplicationController
       end
     end
     @final_comm_supp_list = @recommended_user.uniq
+
 ############################
     @low_stock = []
     Stock.all.each do |s|
