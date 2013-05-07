@@ -48,7 +48,9 @@
 		<% end %>
 		</div> <!--END OF SECTION-->
 		
-  <div class="span6"><!--START OF SECTION-->
+  <div class="span6"><!--START OF SECTION-->		
+	<!-- Beginning of IFP -->
+		<% if current_user.id == @user.id %>
 		<center><h1>Inward Facing Profile</h1></center>
     <hr>
 		<%if !@user.address.nil? %>
@@ -62,9 +64,6 @@
   			    <li><%= link_to user.username, user_path(user.id) %> </li>
 		    <%end%>
 		<% end %>
-		
-	<!-- Beginning of IFP -->
-		<% if current_user.id == @user.id %>
 			<h2>Menu</h2>
 			<% if !@food.empty? %>
 				<table class="table table-bordered">
