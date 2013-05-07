@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :description, :price_range, :user_type, :rating, :cuisine,
   :email, :password, :password_confirmation, :remember_me, :address, :longitude, :latitude
+   validates_uniqueness_of :email
   # attr_accessible :title, :body
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
