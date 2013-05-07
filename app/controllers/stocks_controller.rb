@@ -57,13 +57,21 @@ class StocksController < ApplicationController
 		@stock = Stock.find(params[:id])
 		@user = User.find(@stock.user_id)
 
-		if current_user.id != @stock.user_id
-			redirect_to foods_show_path(@food.user_id), :notice => "You cannot edit #{@user.username}'s inventory!"
+		if current_user.id != @user.id
+			redirect_to stock_show_path(@stock.user_id), :notice => "You cannot edit #{@user.username}'s inventory!"
 		end
 	end
 
 	def update
-		@stock = Stock.new(params[:stock])
+		ingredient = Stock.find(params[:id])
+		@user = User.find(ingredient.user_id)
+
+		if current_user.id != @user.id
+			redirect_to food_show_url(@user.id), :notice => "You cannot edit #{@user.username}'s inventory!" and return
+		end
+
+		@stock = Stock.where(:user_id => current_user.id, :ingredient_name => params[:stock][:ingredient_name]).first
+		@stock.update_attributes(params[:stock])
 		@stock.user_id = current_user.id
 
 		if current_user.user_type == 'supplier'
