@@ -29,8 +29,8 @@ class UsersController < ApplicationController
     @recommended_user=[]
 
 #finds other users that have use same ingredients
-    @restOfIngred = Ingredient.all - @user.ingredients
-    @user.ingredients.each do |myingredient|
+    @restOfIngred = Stock.all - @user.stocks
+    @user.stocks.each do |myingredient|
     	@restOfIngred.each do |youringredient|
     		if youringredient.ingredient_name == myingredient.ingredient_name
     			@common_ingred << youringredient
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     
     @common_ingred.each do |restaurant|
     	User.all.each do |user|
-    		if restaurant.user_id == user.id
+    		if restaurant.user_id == user.id && user.user_type == 'restaurant'
     			@recommended_user << user
     		end
     	end
