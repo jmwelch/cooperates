@@ -29,7 +29,7 @@
   </div>
   <div class="field">
     <%= f.label :supplier %>
-    <%= f.text_field :bought_from %>
+    <%= f.select :bought_from, @suppliers %>
   </div>
 	<div class="actions">
     <%= f.submit :Submit, :class=>'btn' %>

@@ -27,10 +27,23 @@ class TransactionsController < ApplicationController
 			redirect_to stock_show_url(:id => current_user.id), :notice => "Transactions have to be initiated by a restaurant!"
 		end
 		@transaction = Transaction.new
+
+		@suppliers = []
+		User.all.each do |u|
+			if u.user_type == 'supplier'
+				@suppliers.push([u.username, u.username])
+			end
+		end
 	end
 
 	def create
 		@transaction = Transaction.new(params[:transaction])
+		@suppliers = []
+		User.all.each do |u|
+			if u.user_type == 'supplier'
+				@suppliers.push([u.username, u.username])
+			end
+		end
 
 		# Ensures positive numbers are used for quantity
 		if @transaction.quantity < 0
