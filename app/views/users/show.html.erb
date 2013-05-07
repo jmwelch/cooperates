@@ -182,16 +182,6 @@
     			    <li><%= link_to user.username, user_path(user.id) %> </li>
   		    <%end%>
   		<% end %>
-  		
-  		<% if @clients.empty? %>
-  		  <h2>Status of Goods</h2>
-				You should increase your inventory!
-			<% end %>
-
-			<% @clients.each do |c| %>
-				<%= link_to c[0].username, user_path(c[0].id) %> uses
-				<%= c[1] %><br>
-			<% end %>
 	    </br>
 	
 		<% if current_user.id == @user.id %>
@@ -217,12 +207,15 @@
 				<br><br>
 		    <h2>Cooperates&trade; Recommendations</h2>
 				<h3>Restaurants Using Ingredients You Supply:</h3>
-				<% if @final_comm_ingred_list.empty? %>
-					No matches found
+				<% if @clients.empty? %>
+				  <h2>Status of Goods</h2>
+					No Matches Found
 				<% end %>
-  	    <% @final_comm_ingred_list.each do |user| %>
-    	    <%= link_to user.username, user_path(user.id) %></br>
-  	    <% end %>
+
+				<% @clients.each do |c| %>
+					<%= link_to c[0].username, user_path(c[0].id) %> uses
+					<%= c[1] %><br>
+				<% end %>
   	    
         <hr>
 		  	<h2>Import Products via CSV</h2>

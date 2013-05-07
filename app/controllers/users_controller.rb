@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     
     @common_ingred.each do |restaurant|
     	User.all.each do |user|
-    		if restaurant.user_id == user.id
+    		if restaurant.user_id == user.id && user.user_type == 'restaurant'
     			@recommended_user << user
     		end
     	end
