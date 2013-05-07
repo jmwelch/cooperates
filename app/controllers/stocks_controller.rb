@@ -99,6 +99,9 @@ class StocksController < ApplicationController
 				if stock.low_quantity.nil?
 					stock.low_quantity = 0
 				end
+				if stock.quantity < 0
+					stock.quantity = 0
+				end
 				stock.user_id = current_user.id
 				stock.save
 				@stocks.push(stock)
