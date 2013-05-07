@@ -89,7 +89,22 @@ class StocksController < ApplicationController
 	end
 
 	def import
-   	 	Stock.import(params[:file])
-   	 	redirect_to root_url, notice: "Products imported"
-  	end
+		@stocks = []
+		file = params[:file].tempfile
+		CSV.foreach(file, :headers => true) do |row|
+			stock = Stock.find_or_initialize_by_ingredient_name(row[0])
+			stock.update_attributes(:ingredient_name => row[0], :quantity => row[1], :low_quantity => row[2])
+			if stock.low_quantity.nil?
+				stock.low_quantity = 0
+			end
+			if stock.quantity < 0
+				stock.quantity = 0
+			end
+			stock.user_id = current_user.id
+			stock.save
+			@stocks.push(stock)
+		end
+
+		render 'upload'
+	end
 end

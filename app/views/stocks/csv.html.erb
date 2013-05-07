@@ -1,9 +1,20 @@
 <div class='container'>
 <br><br><br>
 
-Ben, this is where you'll write your view for the csv upload form. This is found in app/views/stocks/csv.html.erb
-<br>
-This info for this page is in the Stocks Controller under the csv action. You might have to fiddle around there for a bit.
-<br>
-Also, you'll probably have to write another action in the Stocks Controller for the actual uploading/updating.
+This file uploader is for CSV files in the following format:<br><br>
+The first row is comprised of headers.<br>
+The first column is for the name of the ingredient to be imported.<br>
+The second column is for the quantity of the ingredient imported.<br>
+<% if current_user.user_type = 'restaurant' %>
+	The third column is for the threshold of deciding when an item is low on stock.
+<% end %>
+
+
+<p>
+<%= form_tag import_stocks_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
+</p>
 </div>
