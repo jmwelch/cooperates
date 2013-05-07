@@ -127,7 +127,27 @@
 		    		<%= file_field_tag :file %><br>
 		    		<%= submit_tag "Import", :class=>'btn' %>
 		  	<% end %>
+		  	
+	<% else %>
+		  	<h2>Menu</h2>
+  			<% if !@food.empty? %>
+  				<table class="table table-bordered">
+  					<tr>
+  					  <th>Food Name</th>
+  					  <th>Food Price</th>
+  					</tr>
+  				<% @food.each do |f| %>
+  					<tr>
+  						<td><%= link_to f.name, food_path(f) %></td>
+  						<td>$<%= number_with_precision(f.price, :precision => 2) %></td>
+  					</tr>
+  				<% end %>
+  				</table>
+  			<% else %>
+  				No items currently added to Menu!<br>
+  			<% end %>
   <% end %>
+  
 <!-- End of Restaurant Profile -->
 <% else %>
 </div></div> <!--End of Row/Span 6 Div from OFP-->
@@ -168,6 +188,7 @@
 		</div> <!--END OF IFP ROW DIV-->
 		
     <div class="span6"><!--START OF SECTION-->
+		<% if current_user.id == @user.id %>
   		<center><h1>Inward Facing Profile</h1></center>
       <hr>
   		<%if !@user.address.nil? %>
@@ -181,9 +202,8 @@
     			    <li><%= link_to user.username, user_path(user.id) %> </li>
   		    <%end%>
   		<% end %>
-	    </br>
-	
-		<% if current_user.id == @user.id %>
+      </br>
+		
 				<h2>Ingredients Used</h2>
   			<% if !@ingredients.empty? %>
   				<table class="table table-bordered">
