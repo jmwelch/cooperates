@@ -5,13 +5,17 @@
 		<tr>
 			<td>Ingredient Imported</td>
 			<td>Quantity Imported</td>
+		<% if current_user.user_type == 'restaurant' %>
 			<td>Threshold for Buying More</td>
+		<% end %>
 		</tr>
 		<% @stocks.each do |s| %>
 			<tr>
 				<td><%= s.ingredient_name %></td>
 				<td><%= s.quantity %></td>
+		<% if current_user.user_type == 'restaurant' %>
 				<td><%= s.low_quantity %></td>
+		<% end %>
 			</tr>
 		<% end %>
 	</table>
