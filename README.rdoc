@@ -2,13 +2,13 @@ Cooperat.es is an app built on Ruby on Rails for CS 370 (Software Engineering
 Practicum) project. It was meant to serve as a B2B inventory management tool for
 food suppliers and restaraunts, and eventually as a service allowing them to connect.<br><br>
 
-<h1>Experience/Tools Used</h1><br>
-- Heroku<br>
-- Postgres DB<br>
-- Zerigo DNS Add-on for Heroku<br>
-- Ransack for Search<br>
-- Cucumber and Capybara for Tests <br>
-- jQuery Best-In-Place<br>
-- Google Maps API Geocoder<br>
-- Devise for Authentication<br>
+Experience/Tools Used
+- Heroku
+- Postgres DB
+- Zerigo DNS Add-on for Heroku
+- Ransack for Search
+- Cucumber and Capybara for Tests
+- jQuery Best-In-Place
+- Google Maps API Geocoder
+- Devise for Authentication
 - General: ERB, HAML
